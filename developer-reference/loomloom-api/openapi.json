@@ -1,0 +1,6092 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LoomLoom",
+    "description": "HTTP API for executing and managing LoomLoom AI work through CogFoundry.",
+    "version": "market-v1",
+    "summary": "",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "https://loomloom.cogfoundry.ai",
+      "description": "CogFoundry production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "System"
+    },
+    {
+      "name": "Creator Earnings"
+    },
+    {
+      "name": "Creators"
+    },
+    {
+      "name": "Creator Reviews"
+    },
+    {
+      "name": "Input Assets"
+    },
+    {
+      "name": "Market Listings"
+    },
+    {
+      "name": "Market Runs"
+    },
+    {
+      "name": "Models"
+    },
+    {
+      "name": "Official Templates"
+    },
+    {
+      "name": "Assets"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Runs"
+    },
+    {
+      "name": "User Templates"
+    }
+  ],
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "Health check",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "System"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.healthResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/version": {
+      "get": {
+        "summary": "Service version",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "System"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.versionResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/earnings": {
+      "get": {
+        "summary": "List creator Market earnings",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Creator Earnings"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.creatorEarningsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketListings": {
+      "get": {
+        "summary": "List creator Market SkillBots",
+        "deprecated": false,
+        "description": "Returns Market SkillBot listings owned by the authenticated creator, including pending review, rejected, published, and unlisted listings.",
+        "tags": [
+          "Creators"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Search keyword matched against listing title and description.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Opaque pagination token returned by the previous response.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sort expression. Currently supports createdAt desc.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketListings/{marketListing}": {
+      "get": {
+        "summary": "Get creator Market SkillBot",
+        "deprecated": false,
+        "description": "Returns one Market SkillBot owned by the authenticated creator, including private publishing state such as pending review, rejected, published, and unlisted. It does not expose workflow execution specs.",
+        "tags": [
+          "Creators"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketListings/{marketListing}/versions": {
+      "get": {
+        "summary": "List creator Market SkillBot versions",
+        "deprecated": false,
+        "description": "Returns version history for a Market SkillBot owned by the authenticated creator. The response includes status, review, pricing, source template, and hash metadata, but does not expose workflow execution specs.",
+        "tags": [
+          "Creators"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingVersionsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketTransactions": {
+      "get": {
+        "summary": "List creator Market transactions",
+        "deprecated": false,
+        "description": "Returns Market SkillBot calls for the authenticated creator, including execution and settlement projection plus matched creator earning when available. It does not expose funding action internals.",
+        "tags": [
+          "Creators"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.creatorMarketTransactionsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketReviewRequests": {
+      "get": {
+        "summary": "List my Market review requests",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Creator Reviews"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Review status filter",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketReviewRequestsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketReviewRequests/{marketReviewRequest}": {
+      "get": {
+        "summary": "Get my Market review request",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Creator Reviews"
+        ],
+        "parameters": [
+          {
+            "name": "marketReviewRequest",
+            "in": "path",
+            "description": "Market review request ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketReviewRequestResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/creators/me/marketReviewRequests/{marketReviewRequest}:withdraw": {
+      "post": {
+        "summary": "Withdraw my Market review request",
+        "deprecated": false,
+        "description": "Withdraws a pending Market review request owned by the authenticated creator. For publish or update_version requests, the pending listing version becomes withdrawn and is no longer executable or sellable. For update_public_profile requests, the listing and published version are unchanged.",
+        "tags": [
+          "Creator Reviews"
+        ],
+        "parameters": [
+          {
+            "name": "marketReviewRequest",
+            "in": "path",
+            "description": "Market review request ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.withdrawMarketReviewRequestRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketReviewRequestResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/inputAssets:upload": {
+      "post": {
+        "summary": "Upload input asset",
+        "deprecated": false,
+        "description": "Uploads a controlled raw input asset through Product API. The content field is base64 encoded in JSON.",
+        "tags": [
+          "Input Assets"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.uploadInputAssetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.inputAssetResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/orchestrationInputs:upload": {
+      "post": {
+        "summary": "Upload orchestration input",
+        "deprecated": false,
+        "description": "Uploads a flat JSONL execution input through Product API. The returned inputFileId is the only file ID accepted by template run APIs; inputAssetId values from /inputAssets:upload are not valid here.",
+        "tags": [
+          "Input Assets"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.uploadOrchestrationInputRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.orchestrationInputResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings": {
+      "get": {
+        "summary": "List published Market SkillBots",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "Search keyword matched against listing title and description.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Opaque pagination token returned by the previous response.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sort expression. Currently supports createdAt desc.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.publicMarketListingsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Publish a Market SkillBot listing",
+        "deprecated": false,
+        "description": "Creates a new listing or publishes a new immutable listing version from a LoomLoom template version.",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.publishMarketListingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}": {
+      "get": {
+        "summary": "Get Market SkillBot detail",
+        "deprecated": false,
+        "description": "Returns one public Market SkillBot listing. Pending, rejected, unlisted, blocked, or otherwise non-public listings are not visible through this buyer-facing route.",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.publicMarketListingResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:list": {
+      "post": {
+        "summary": "Restore a Market SkillBot listing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:unlist": {
+      "post": {
+        "summary": "Unlist a Market SkillBot",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketListingResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:updatePublicProfile": {
+      "post": {
+        "summary": "Submit Market SkillBot public profile update",
+        "deprecated": false,
+        "description": "Creates a pending review request for listing public profile fields only. It does not change execution version, input/output contract, pricing, sale status, or transaction facts before approval.",
+        "tags": [
+          "Market Listings"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.updateMarketListingPublicProfileRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketReviewRequestResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}/workbook": {
+      "get": {
+        "summary": "Download Market SkillBot workbook",
+        "deprecated": false,
+        "description": "Downloads an Excel workbook for the public input schema of a Market SkillBot. The workbook is generated from the source LoomLoom template version behind the selected listing version.",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "listingVersionId",
+            "in": "query",
+            "description": "Market listing version ID. Defaults to the currently published version.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:execute": {
+      "post": {
+        "summary": "Execute a Market SkillBot",
+        "deprecated": false,
+        "description": "Requires confirm=true and a stable clientRequestId for the buyer-confirmed execution attempt. Returns Market transaction context plus LoomLoom run ID.",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.executeMarketListingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketContextResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:executeWorkbook": {
+      "post": {
+        "summary": "Execute Market SkillBot workbook",
+        "deprecated": false,
+        "description": "Requires confirm=true and a stable clientRequestId for the buyer-confirmed workbook execution attempt.",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.marketListingWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketContextResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:quote": {
+      "post": {
+        "summary": "Quote a Market SkillBot run",
+        "deprecated": false,
+        "description": "Returns estimated execution cost plus task-level creator fee. Final settlement follows actual LoomLoom execution cost plus billable task count times task_fixed_fee_t.",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.quoteMarketListingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketQuoteResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:quoteWorkbook": {
+      "post": {
+        "summary": "Quote Market SkillBot workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.marketListingWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketQuoteResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/marketListings/{marketListing}:validateWorkbook": {
+      "post": {
+        "summary": "Validate Market SkillBot workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Market Runs"
+        ],
+        "parameters": [
+          {
+            "name": "marketListing",
+            "in": "path",
+            "description": "Market listing ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.marketListingWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templateValidationResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/models": {
+      "get": {
+        "summary": "List executable models",
+        "deprecated": false,
+        "description": "Lists model catalog entries for one step type. stepType is required to avoid mixed text/image/video catalogs.",
+        "tags": [
+          "Models"
+        ],
+        "parameters": [
+          {
+            "name": "stepType",
+            "in": "query",
+            "description": "Step type, for example text-generate, image-generate, or video-generate.",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Provider filter.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "onlyAvailable",
+            "in": "query",
+            "description": "When false, include unavailable known models. Default true.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.modelsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates": {
+      "get": {
+        "summary": "List official templates",
+        "deprecated": false,
+        "description": "Returns official workbook-based templates exposed through the LoomLoom Public API.",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.officialTemplatesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}/schema": {
+      "get": {
+        "summary": "Get official template schema",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.officialTemplateSchemaResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}/workbook": {
+      "get": {
+        "summary": "Download official template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:precheckRows": {
+      "post": {
+        "summary": "Precheck official template rows",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateRowsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templatePrecheckResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:precheckWorkbook": {
+      "post": {
+        "summary": "Precheck official template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templatePrecheckResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:runRows": {
+      "post": {
+        "summary": "Run official template rows",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateRowsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.officialTemplateRunResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:runWorkbook": {
+      "post": {
+        "summary": "Run official template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.officialTemplateRunResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:validateRows": {
+      "post": {
+        "summary": "Validate official template rows",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateRowsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templateValidationResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/officialTemplates/{officialTemplate}:validateWorkbook": {
+      "post": {
+        "summary": "Validate official template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Official Templates"
+        ],
+        "parameters": [
+          {
+            "name": "officialTemplate",
+            "in": "path",
+            "description": "Official template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templateValidationResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/executables": {
+      "get": {
+        "summary": "List executable assets",
+        "deprecated": false,
+        "description": "Returns the caller's executable LoomLoom assets, including private templates and Market SkillBots.",
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.assetsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/marketUsages": {
+      "get": {
+        "summary": "List buyer Market usages",
+        "deprecated": false,
+        "description": "Returns Market SkillBot calls for the authenticated buyer. It is a buyer-facing usage view, not a raw transaction or funding action API.",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketUsagesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/marketUsages/{marketUsage}": {
+      "get": {
+        "summary": "Get buyer Market usage",
+        "deprecated": false,
+        "description": "Returns one Market SkillBot call for the authenticated buyer. Funding actions and creator earning internals are not exposed.",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "marketUsage",
+            "in": "path",
+            "description": "Market usage ID, currently the run_transaction_id",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.marketUsageResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/runs": {
+      "get": {
+        "summary": "List LoomLoom runs with optional Market context",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Run status filter",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 50, max 200.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Page token",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Order by expression",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.listRunsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/runs/{run}": {
+      "get": {
+        "summary": "Get LoomLoom run detail with optional Market context",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "run",
+            "in": "path",
+            "description": "LoomLoom run ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.runDetailResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/runs/{run}/artifacts": {
+      "get": {
+        "summary": "List run artifacts",
+        "deprecated": false,
+        "description": "Returns result artifacts for one LoomLoom run. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "run",
+            "in": "path",
+            "description": "Run ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 200.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.runArtifactsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/runs/{run}/resultRows": {
+      "get": {
+        "summary": "List run result rows",
+        "deprecated": false,
+        "description": "Returns row-level input and result aggregation for one LoomLoom run. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "run",
+            "in": "path",
+            "description": "Run ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 50, max 200.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Page token",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.runResultRowsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/runs/{run}/resultWorkbook": {
+      "get": {
+        "summary": "Download run result workbook",
+        "deprecated": false,
+        "description": "Downloads an Excel workbook containing run inputs and results. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "tags": [
+          "Runs"
+        ],
+        "parameters": [
+          {
+            "name": "run",
+            "in": "path",
+            "description": "Run ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates": {
+      "get": {
+        "summary": "List my private templates",
+        "deprecated": false,
+        "description": "Returns private template summaries for the authenticated user. The response intentionally excludes workflow specs, hidden prompts, runtime config, and Market release package internals.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Template status filter. Default active.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size. Default 100, max 500.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageOffset",
+            "in": "query",
+            "description": "Page offset. Default 0.",
+            "required": false,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplatesResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create my private template",
+        "deprecated": false,
+        "description": "Creates a private template container. A runnable version is added separately with canonical_spec.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.createUserTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}": {
+      "get": {
+        "summary": "Get my private template",
+        "deprecated": false,
+        "description": "Returns one private template summary and its version summaries for the authenticated user. The response intentionally excludes canonical_spec, workflow definitions, hidden prompts, runtime config, source refs, and Market release package internals.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateDetailResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}/versions": {
+      "get": {
+        "summary": "List my private template versions",
+        "deprecated": false,
+        "description": "Returns immutable version summaries for one private template. The response intentionally excludes canonical_spec and executable workflow internals.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateVersionsResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Save my private template version",
+        "deprecated": false,
+        "description": "Saves an immutable private template version from a structured TemplateSpec canonical_spec object.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.saveUserTemplateVersionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateVersionResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}/versions/{version}/workbook": {
+      "get": {
+        "summary": "Download my private template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Private template version ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}/versions/{version}:precheckWorkbook": {
+      "post": {
+        "summary": "Precheck my private template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Private template version ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templatePrecheckResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}/versions/{version}:runWorkbook": {
+      "post": {
+        "summary": "Run my private template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Private template version ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateRunResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}/versions/{version}:validateWorkbook": {
+      "post": {
+        "summary": "Validate my private template workbook",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "Private template version ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.officialTemplateWorkbookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templateValidationResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}:precheck": {
+      "post": {
+        "summary": "Precheck my private template",
+        "deprecated": false,
+        "description": "Estimates a private LoomLoom template version run using an uploaded JSONL input file. The response includes estimated cost and balance check and does not create a run.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.runUserTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.templatePrecheckResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    },
+    "/loom/v1/users/me/templates/{template}:run": {
+      "post": {
+        "summary": "Run my private template",
+        "deprecated": false,
+        "description": "Submits a run for an authenticated user's private LoomLoom template version. The request binds an explicit immutable version and input asset; it does not expose or accept workflow specs.",
+        "tags": [
+          "User Templates"
+        ],
+        "parameters": [
+          {
+            "name": "template",
+            "in": "path",
+            "description": "Private template ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/server.runUserTemplateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.userTemplateRunResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server.errorResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "BearerAuth1": []
+          }
+        ]
+      }
+    }
+  },
+  "webhooks": {},
+  "components": {
+    "schemas": {
+      "server.artifactResponse": {
+        "type": "object",
+        "properties": {
+          "accessUrl": {
+            "type": "string"
+          },
+          "artifactId": {
+            "type": "string"
+          },
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "inlineText": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "portName": {
+            "type": "string"
+          },
+          "sourceRowIndex": {
+            "type": "integer"
+          },
+          "stepId": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.assetsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.executableAssetResponse"
+            }
+          }
+        }
+      },
+      "server.createUserTemplateRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "server.creatorEarningResponse": {
+        "type": "object",
+        "properties": {
+          "amountT": {
+            "type": "integer"
+          },
+          "creatorUserId": {
+            "type": "integer"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "incomePostStatus": {
+            "type": "string"
+          },
+          "runTransactionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.creatorEarningsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.creatorEarningResponse"
+            }
+          },
+          "totalAmountT": {
+            "type": "integer"
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.creatorMarketTransactionResponse": {
+        "type": "object",
+        "properties": {
+          "actualExecutionCostT": {
+            "type": "integer"
+          },
+          "creatorEarning": {
+            "$ref": "#/components/schemas/server.creatorEarningResponse"
+          },
+          "creatorNetEarningT": {
+            "type": "integer"
+          },
+          "creatorUserId": {
+            "type": "integer"
+          },
+          "estimatedBuyerPayableT": {
+            "type": "integer"
+          },
+          "estimatedExecutionCostT": {
+            "type": "integer"
+          },
+          "finalBuyerPayableT": {
+            "type": "integer"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "runTransactionId": {
+            "type": "string"
+          },
+          "skillName": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "transactionStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "server.creatorMarketTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.creatorMarketTransactionResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.errorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "server.executableAssetResponse": {
+        "type": "object",
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "assetType": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "inputSchemaSnapshot": {
+            "type": "string"
+          },
+          "marketListingId": {
+            "type": "string"
+          },
+          "marketListingVersionId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string"
+          },
+          "ownerUserId": {
+            "type": "integer"
+          },
+          "pricingDescription": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "primaryOutputType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "templateVersionId": {
+            "type": "string"
+          },
+          "updatedAtUnix": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.executeMarketListingRequest": {
+        "type": "object",
+        "required": [
+          "clientRequestId"
+        ],
+        "properties": {
+          "clientRequestId": {
+            "type": "string"
+          },
+          "confirm": {
+            "type": "boolean"
+          },
+          "inputRows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {},
+              "properties": {}
+            }
+          },
+          "listingVersionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.healthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "server.inputAssetResponse": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string"
+          },
+          "inputAssetId": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "sizeBytes": {
+            "type": "integer"
+          },
+          "uploadedAt": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.listRunsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.runSummaryResponse"
+            }
+          },
+          "nextPageToken": {
+            "type": "string"
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketContextResponse": {
+        "type": "object",
+        "properties": {
+          "actualExecutionCostT": {
+            "type": "integer"
+          },
+          "estimatedBuyerPayableT": {
+            "type": "integer"
+          },
+          "estimatedExecutionCostT": {
+            "type": "integer"
+          },
+          "finalBuyerPayableT": {
+            "type": "integer"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "runTransactionId": {
+            "type": "string"
+          },
+          "skillName": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "transactionStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "server.marketListingResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "executionAvailabilityStatus": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inputSchemaSnapshot": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "ownerUserId": {
+            "type": "integer"
+          },
+          "packageHash": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "pricingSnapshotHash": {
+            "type": "string"
+          },
+          "publishedVersionId": {
+            "type": "string"
+          },
+          "reviewReason": {
+            "type": "string"
+          },
+          "reviewRequestId": {
+            "type": "string"
+          },
+          "reviewStatus": {
+            "type": "string"
+          },
+          "saleStatus": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketListingVersionResponse": {
+        "type": "object",
+        "properties": {
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "creatorUserId": {
+            "type": "integer"
+          },
+          "definitionHash": {
+            "type": "string"
+          },
+          "executionAvailabilityStatus": {
+            "type": "string"
+          },
+          "executionBlockReason": {
+            "type": "string"
+          },
+          "executionSnapshotHash": {
+            "type": "string"
+          },
+          "hashAlgorithmVersion": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "packageHash": {
+            "type": "string"
+          },
+          "packageSchemaVersion": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "pricingSnapshotHash": {
+            "type": "string"
+          },
+          "publicContentSnapshotHash": {
+            "type": "string"
+          },
+          "reviewPolicyVersion": {
+            "type": "string"
+          },
+          "reviewReason": {
+            "type": "string"
+          },
+          "reviewStatus": {
+            "type": "string"
+          },
+          "reviewedAtUnix": {
+            "type": "integer"
+          },
+          "saleStatus": {
+            "type": "string"
+          },
+          "sourceTemplateId": {
+            "type": "string"
+          },
+          "sourceTemplateVersionId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "templateVersionId": {
+            "type": "string"
+          },
+          "versionNumber": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketListingVersionsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.marketListingVersionResponse"
+            }
+          }
+        }
+      },
+      "server.marketListingWorkbookRequest": {
+        "type": "object",
+        "properties": {
+          "clientRequestId": {
+            "type": "string"
+          },
+          "confirm": {
+            "type": "boolean"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "filename": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.marketListingsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.marketListingResponse"
+            }
+          },
+          "nextPageToken": {
+            "type": "string"
+          }
+        }
+      },
+      "server.marketQuoteResponse": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "estimatedBuyerPayableT": {
+            "type": "integer"
+          },
+          "estimatedExecutionCostT": {
+            "type": "integer"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "quoteId": {
+            "type": "string"
+          },
+          "taskCount": {
+            "type": "integer"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketReviewRequestResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "reviewReason": {
+            "type": "string"
+          },
+          "reviewedAtUnix": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "submittedAtUnix": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketReviewRequestsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.marketReviewRequestResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.marketUsageResponse": {
+        "type": "object",
+        "properties": {
+          "actualExecutionCostT": {
+            "type": "integer"
+          },
+          "estimatedBuyerPayableT": {
+            "type": "integer"
+          },
+          "estimatedExecutionCostT": {
+            "type": "integer"
+          },
+          "finalBuyerPayableT": {
+            "type": "integer"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "runTransactionId": {
+            "type": "string"
+          },
+          "skillName": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "transactionStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "server.marketUsagesResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.marketUsageResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.modelSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "availabilityReason": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "executionAdapter": {
+            "type": "string"
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "modelId": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "supportedApis": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportedStepTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "server.modelsResponse": {
+        "type": "object",
+        "properties": {
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.modelSummaryResponse"
+            }
+          }
+        }
+      },
+      "server.officialTemplateColumn": {
+        "type": "object",
+        "properties": {
+          "fieldKey": {
+            "type": "string"
+          },
+          "headerLabel": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.officialTemplateField": {
+        "type": "object",
+        "properties": {
+          "acceptedInputKinds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "acceptedMimeTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "businessHint": {
+            "type": "string"
+          },
+          "enumValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "inputHint": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "multiValue": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "server.officialTemplateResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "inputSummary": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "outputType": {
+            "type": "string"
+          },
+          "scenario": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "server.officialTemplateRowsRequest": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string"
+          },
+          "clientRequestId": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "properties": {}
+            }
+          }
+        }
+      },
+      "server.officialTemplateRunResponse": {
+        "type": "object",
+        "properties": {
+          "acceptedAtUnix": {
+            "type": "integer"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "server.officialTemplateSampleRow": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "properties": {}
+          }
+        }
+      },
+      "server.officialTemplateSchemaResponse": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.officialTemplateColumn"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.officialTemplateField"
+            }
+          },
+          "inputSummary": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "outputType": {
+            "type": "string"
+          },
+          "sampleRows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.officialTemplateSampleRow"
+            }
+          },
+          "scenario": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "server.officialTemplateWorkbookRequest": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string"
+          },
+          "clientRequestId": {
+            "type": "string"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "filename": {
+            "type": "string"
+          },
+          "recordCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.officialTemplatesResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.officialTemplateResponse"
+            }
+          }
+        }
+      },
+      "server.orchestrationInputResponse": {
+        "type": "object",
+        "properties": {
+          "filename": {
+            "type": "string"
+          },
+          "inputFileId": {
+            "type": "string"
+          },
+          "rowCount": {
+            "type": "integer"
+          },
+          "uploadedAt": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.publicMarketListingResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "executionAvailabilityStatus": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "inputSchemaSnapshot": {
+            "type": "string"
+          },
+          "listingVersionId": {
+            "type": "string"
+          },
+          "pricingRuleVersion": {
+            "type": "string"
+          },
+          "saleStatus": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.publicMarketListingsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.publicMarketListingResponse"
+            }
+          },
+          "nextPageToken": {
+            "type": "string"
+          }
+        }
+      },
+      "server.publishMarketListingRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "listingId": {
+            "type": "string"
+          },
+          "taskFixedFeeT": {
+            "type": "integer"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "templateVersionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.quoteMarketListingRequest": {
+        "type": "object",
+        "properties": {
+          "inputRows": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {},
+              "properties": {}
+            }
+          },
+          "listingVersionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.runArtifactsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.artifactResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.runDetailResponse": {
+        "type": "object",
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.artifactResponse"
+            }
+          },
+          "market": {
+            "$ref": "#/components/schemas/server.marketContextResponse"
+          },
+          "run": {
+            "$ref": "#/components/schemas/server.runSummaryResponse"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.runTaskResponse"
+            }
+          }
+        }
+      },
+      "server.runResultRowArtifact": {
+        "type": "object",
+        "properties": {
+          "accessUrl": {
+            "type": "string"
+          },
+          "artifactId": {
+            "type": "string"
+          },
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "inlineText": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "portName": {
+            "type": "string"
+          },
+          "stepId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.runResultRowResponse": {
+        "type": "object",
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.runResultRowArtifact"
+            }
+          },
+          "errorMessage": {
+            "type": "string"
+          },
+          "inputJson": {
+            "type": "string"
+          },
+          "rowIndex": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "stepErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.runResultRowStepError"
+            }
+          }
+        }
+      },
+      "server.runResultRowStepError": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          },
+          "errorMessage": {
+            "type": "string"
+          },
+          "errorUrl": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "stepId": {
+            "type": "string"
+          },
+          "stepLabel": {
+            "type": "string"
+          }
+        }
+      },
+      "server.runResultRowsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.runResultRowResponse"
+            }
+          },
+          "nextPageToken": {
+            "type": "string"
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.runSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "actualCostT": {
+            "type": "integer"
+          },
+          "cancelledTasks": {
+            "type": "integer"
+          },
+          "completedAtUnix": {
+            "type": "integer"
+          },
+          "completedTasks": {
+            "type": "integer"
+          },
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "definitionHash": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "estimatedCostT": {
+            "type": "integer"
+          },
+          "failedTasks": {
+            "type": "integer"
+          },
+          "firstErrorMessage": {
+            "type": "string"
+          },
+          "inputFilename": {
+            "type": "string"
+          },
+          "market": {
+            "$ref": "#/components/schemas/server.marketContextResponse"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "sourceType": {
+            "type": "string"
+          },
+          "startedAtUnix": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "templateKey": {
+            "type": "string"
+          },
+          "templateName": {
+            "type": "string"
+          },
+          "templateUuid": {
+            "type": "string"
+          },
+          "totalTasks": {
+            "type": "integer"
+          },
+          "updatedAtUnix": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.runTaskResponse": {
+        "type": "object",
+        "properties": {
+          "artifactCount": {
+            "type": "integer"
+          },
+          "errorMessage": {
+            "type": "string"
+          },
+          "sourceRowIndex": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.runUserTemplateRequest": {
+        "type": "object",
+        "properties": {
+          "callbackUrl": {
+            "type": "string"
+          },
+          "clientRequestId": {
+            "type": "string"
+          },
+          "inputFileId": {
+            "type": "string"
+          },
+          "versionId": {
+            "type": "string"
+          }
+        }
+      },
+      "server.saveUserTemplateVersionRequest": {
+        "type": "object",
+        "properties": {
+          "canonicalSpec": {
+            "type": "object",
+            "properties": {}
+          },
+          "versionNote": {
+            "type": "string"
+          }
+        }
+      },
+      "server.templateBalanceCheck": {
+        "type": "object",
+        "properties": {
+          "availableBalance": {
+            "type": "integer"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "isSufficient": {
+            "type": "boolean"
+          }
+        }
+      },
+      "server.templatePrecheckResponse": {
+        "type": "object",
+        "properties": {
+          "balanceCheck": {
+            "$ref": "#/components/schemas/server.templateBalanceCheck"
+          },
+          "estimatedTotalCostT": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.templateRowValidationError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "fieldKey": {
+            "type": "string"
+          },
+          "rowIndex": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.templateValidationResponse": {
+        "type": "object",
+        "properties": {
+          "fileErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.templateRowValidationError"
+            }
+          },
+          "valid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "server.updateMarketListingPublicProfileRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          }
+        }
+      },
+      "server.uploadInputAssetRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "format": "base64"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          }
+        }
+      },
+      "server.uploadOrchestrationInputRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "format": "base64"
+          },
+          "filename": {
+            "type": "string"
+          }
+        }
+      },
+      "server.userTemplateDetailResponse": {
+        "type": "object",
+        "properties": {
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "latestVersionId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "primaryOutputType": {
+            "type": "string"
+          },
+          "publishedVersionId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "updatedAtUnix": {
+            "type": "integer"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.userTemplateVersionResponse"
+            }
+          }
+        }
+      },
+      "server.userTemplateResponse": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "latestVersionId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "primaryOutputType": {
+            "type": "string"
+          },
+          "publishedVersionId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string"
+          },
+          "updatedAtUnix": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.userTemplateRunResponse": {
+        "type": "object",
+        "properties": {
+          "acceptedAtUnix": {
+            "type": "integer"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "server.userTemplateVersionResponse": {
+        "type": "object",
+        "properties": {
+          "createdAtUnix": {
+            "type": "integer"
+          },
+          "definitionHash": {
+            "type": "string"
+          },
+          "specVersion": {
+            "type": "string"
+          },
+          "versionId": {
+            "type": "string"
+          },
+          "versionNumber": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.userTemplateVersionsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.userTemplateVersionResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.userTemplatesResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/server.userTemplateResponse"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "server.versionResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string"
+          }
+        }
+      },
+      "server.withdrawMarketReviewRequestRequest": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {},
+    "securitySchemes": {
+      "BearerAuth1": {
+        "description": "Use `Authorization: Bearer <api-token>`.",
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
+}
