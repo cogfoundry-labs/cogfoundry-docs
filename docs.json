@@ -1,0 +1,219 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "CogFoundry Docs",
+  "colors": {
+    "primary": "#111111",
+    "light": "#111111",
+    "dark": "#FFFFFF"
+  },
+  "logo": {
+    "light": "/assets/logo-mark-on-light.svg",
+    "dark": "/assets/logo-mark-on-dark.svg",
+    "href": "https://cogfoundry.ai/"
+  },
+  "favicon": {
+    "light": "/assets/logo-mark-on-light.svg",
+    "dark": "/assets/logo-mark-on-dark.svg"
+  },
+  "fonts": {
+    "family": "Inter",
+    "heading": {
+      "family": "Inter",
+      "weight": 650
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "appearance": {
+    "default": "system"
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "documentation/overview/quickstart",
+              "documentation/overview/what-is-cogfoundry",
+              "documentation/overview/core-concepts",
+              "documentation/overview/product-map",
+              "documentation/overview/faq"
+            ]
+          },
+          {
+            "group": "LoomLoom",
+            "pages": [
+              "documentation/loomloom/overview",
+              "documentation/loomloom/why-ai-loops"
+            ]
+          },
+          {
+            "group": "Quick start",
+            "pages": [
+              "documentation/loomloom/installation",
+              "documentation/loomloom/configure-credentials",
+              "documentation/loomloom/quick-start"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "documentation/loomloom/workflows",
+              "documentation/loomloom/private-templates",
+              "documentation/loomloom/skillbots-and-market"
+            ]
+          },
+          {
+            "group": "Operate LoomLoom",
+            "pages": [
+              "documentation/loomloom/supported-agents",
+              "documentation/loomloom/supported-models",
+              "documentation/loomloom/templates",
+              "documentation/loomloom/official-templates",
+              "documentation/loomloom/excel-workbook-workflows",
+              "documentation/loomloom/run-and-monitor-workflows",
+              "documentation/loomloom/artifacts-and-results"
+            ]
+          },
+          {
+            "group": "Reference and support",
+            "pages": [
+              "documentation/loomloom/command-reference",
+              "documentation/loomloom/security-notes",
+              "documentation/loomloom/troubleshooting",
+              "documentation/loomloom/uninstall"
+            ]
+          },
+          {
+            "group": "Privacy",
+            "pages": [
+              "documentation/privacy/data-collection",
+              "documentation/privacy/provider-logging"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developer Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "LoomLoom API",
+            "pages": [
+              "developer-reference/loomloom-api/overview",
+              "developer-reference/loomloom-api/authentication",
+              "developer-reference/loomloom-api/quickstart"
+            ]
+          },
+          {
+            "group": "LoomLoom API endpoints",
+            "openapi": {
+              "source": "developer-reference/loomloom-api/openapi.json",
+              "directory": "developer-reference/loomloom-api/endpoints"
+            }
+          },
+          {
+            "group": "LoomLoom CLI",
+            "pages": [
+              "developer-reference/loomloom-cli/overview",
+              "developer-reference/loomloom-cli/command-help",
+              "developer-reference/loomloom-cli/authentication",
+              "developer-reference/loomloom-cli/server-profiles",
+              "developer-reference/loomloom-cli/environment-variables",
+              "developer-reference/loomloom-cli/output-formats",
+              "developer-reference/loomloom-cli/money-units",
+              "developer-reference/loomloom-cli/doctor",
+              "developer-reference/loomloom-cli/input-assets",
+              "developer-reference/loomloom-cli/official-templates",
+              "developer-reference/loomloom-cli/private-templates",
+              "developer-reference/loomloom-cli/runs",
+              "developer-reference/loomloom-cli/artifacts",
+              "developer-reference/loomloom-cli/models-and-assets",
+              "developer-reference/loomloom-cli/local-agent-skills",
+              "developer-reference/loomloom-cli/market-for-users",
+              "developer-reference/loomloom-cli/market-for-creators",
+              "developer-reference/loomloom-cli/usage-and-earnings",
+              "developer-reference/loomloom-cli/exit-codes",
+              "developer-reference/loomloom-cli/troubleshooting"
+            ]
+          },
+          {
+            "group": "TemplateSpec",
+            "pages": [
+              "developer-reference/template-spec/overview"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "redirects": [
+    {
+      "source": "/overview/:slug*",
+      "destination": "/documentation/overview/:slug*"
+    },
+    {
+      "source": "/loomloom/:slug*",
+      "destination": "/documentation/loomloom/:slug*"
+    },
+    {
+      "source": "/model-center/:slug*",
+      "destination": "/documentation/loomloom/supported-models"
+    },
+    {
+      "source": "/documentation/model-center/:slug*",
+      "destination": "/documentation/loomloom/supported-models"
+    },
+    {
+      "source": "/privacy/:slug*",
+      "destination": "/documentation/privacy/:slug*"
+    }
+  ],
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "CogFoundry",
+      "href": "https://cogfoundry.ai/"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/cogfoundry-labs"
+    },
+    "links": [
+      {
+        "header": "Source",
+        "items": [
+          {
+            "label": "LoomLoom",
+            "href": "https://github.com/cogfoundry-labs/loomloom"
+          },
+          {
+            "label": "Documentation",
+            "href": "https://github.com/cogfoundry-labs/cogfoundry-docs"
+          }
+        ]
+      }
+    ]
+  }
+}
