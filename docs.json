@@ -8,13 +8,13 @@
     "dark": "#FFFFFF"
   },
   "logo": {
-    "light": "/assets/logo-mark-on-light.svg",
-    "dark": "/assets/logo-mark-on-dark.svg",
+    "light": "/assets/cogfoundry-mark.svg",
+    "dark": "/assets/cogfoundry-mark.svg",
     "href": "https://cogfoundry.ai/"
   },
   "favicon": {
-    "light": "/assets/logo-mark-on-light.svg",
-    "dark": "/assets/logo-mark-on-dark.svg"
+    "light": "/assets/cogfoundry-mark.svg",
+    "dark": "/assets/cogfoundry-mark.svg"
   },
   "fonts": {
     "family": "Inter",
