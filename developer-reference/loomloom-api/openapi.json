@@ -1,8 +1,8 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "LoomLoom",
-    "description": "HTTP API for executing and managing LoomLoom AI work through CogFoundry.",
+    "title": "loomloom",
+    "description": "HTTP API for executing and managing loomloom AI work through CogFoundry.",
     "version": "market-v1",
     "summary": "",
     "contact": {}
@@ -1049,7 +1049,7 @@
       "post": {
         "summary": "Publish a Market SkillBot listing",
         "deprecated": false,
-        "description": "Creates a new listing or publishes a new immutable listing version from a LoomLoom template version.",
+        "description": "Creates a new listing or publishes a new immutable listing version from a loomloom template version.",
         "tags": [
           "Market Listings"
         ],
@@ -1445,7 +1445,7 @@
       "get": {
         "summary": "Download Market SkillBot workbook",
         "deprecated": false,
-        "description": "Downloads an Excel workbook for the public input schema of a Market SkillBot. The workbook is generated from the source LoomLoom template version behind the selected listing version.",
+        "description": "Downloads an Excel workbook for the public input schema of a Market SkillBot. The workbook is generated from the source loomloom template version behind the selected listing version.",
         "tags": [
           "Market Runs"
         ],
@@ -1540,7 +1540,7 @@
       "post": {
         "summary": "Execute a Market SkillBot",
         "deprecated": false,
-        "description": "Requires confirm=true and a stable clientRequestId for the buyer-confirmed execution attempt. Returns Market transaction context plus LoomLoom run ID.",
+        "description": "Requires confirm=true and a stable clientRequestId for the buyer-confirmed execution attempt. Returns Market transaction context plus loomloom run ID.",
         "tags": [
           "Market Runs"
         ],
@@ -1728,7 +1728,7 @@
       "post": {
         "summary": "Quote a Market SkillBot run",
         "deprecated": false,
-        "description": "Returns estimated execution cost plus task-level creator fee. Final settlement follows actual LoomLoom execution cost plus billable task count times task_fixed_fee_t.",
+        "description": "Returns estimated execution cost plus task-level creator fee. Final settlement follows actual loomloom execution cost plus billable task count times task_fixed_fee_t.",
         "tags": [
           "Market Runs"
         ],
@@ -2081,7 +2081,7 @@
       "get": {
         "summary": "List official templates",
         "deprecated": false,
-        "description": "Returns official workbook-based templates exposed through the LoomLoom Public API.",
+        "description": "Returns official workbook-based templates exposed through the loomloom Public API.",
         "tags": [
           "Official Templates"
         ],
@@ -2799,7 +2799,7 @@
       "get": {
         "summary": "List executable assets",
         "deprecated": false,
-        "description": "Returns the caller's executable LoomLoom assets, including private templates and Market SkillBots.",
+        "description": "Returns the caller's executable loomloom assets, including private templates and Market SkillBots.",
         "tags": [
           "Assets"
         ],
@@ -3027,7 +3027,7 @@
     },
     "/loom/v1/users/me/runs": {
       "get": {
-        "summary": "List LoomLoom runs with optional Market context",
+        "summary": "List loomloom runs with optional Market context",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -3130,7 +3130,7 @@
     },
     "/loom/v1/users/me/runs/{run}": {
       "get": {
-        "summary": "Get LoomLoom run detail with optional Market context",
+        "summary": "Get loomloom run detail with optional Market context",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -3140,7 +3140,7 @@
           {
             "name": "run",
             "in": "path",
-            "description": "LoomLoom run ID",
+            "description": "loomloom run ID",
             "required": true,
             "example": "",
             "schema": {
@@ -3216,7 +3216,7 @@
       "get": {
         "summary": "List run artifacts",
         "deprecated": false,
-        "description": "Returns result artifacts for one LoomLoom run. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "description": "Returns result artifacts for one loomloom run. The caller's credential is forwarded to loomloom Core for access control.",
         "tags": [
           "Runs"
         ],
@@ -3321,7 +3321,7 @@
       "get": {
         "summary": "List run result rows",
         "deprecated": false,
-        "description": "Returns row-level input and result aggregation for one LoomLoom run. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "description": "Returns row-level input and result aggregation for one loomloom run. The caller's credential is forwarded to loomloom Core for access control.",
         "tags": [
           "Runs"
         ],
@@ -3436,7 +3436,7 @@
       "get": {
         "summary": "Download run result workbook",
         "deprecated": false,
-        "description": "Downloads an Excel workbook containing run inputs and results. The caller's credential is forwarded to LoomLoom Core for access control.",
+        "description": "Downloads an Excel workbook containing run inputs and results. The caller's credential is forwarded to loomloom Core for access control.",
         "tags": [
           "Runs"
         ],
@@ -4362,7 +4362,7 @@
       "post": {
         "summary": "Precheck my private template",
         "deprecated": false,
-        "description": "Estimates a private LoomLoom template version run using an uploaded JSONL input file. The response includes estimated cost and balance check and does not create a run.",
+        "description": "Estimates a private loomloom template version run using an uploaded JSONL input file. The response includes estimated cost and balance check and does not create a run.",
         "tags": [
           "User Templates"
         ],
@@ -4456,7 +4456,7 @@
       "post": {
         "summary": "Run my private template",
         "deprecated": false,
-        "description": "Submits a run for an authenticated user's private LoomLoom template version. The request binds an explicit immutable version and input asset; it does not expose or accept workflow specs.",
+        "description": "Submits a run for an authenticated user's private loomloom template version. The request binds an explicit immutable version and input asset; it does not expose or accept workflow specs.",
         "tags": [
           "User Templates"
         ],

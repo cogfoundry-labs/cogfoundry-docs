@@ -1,10 +1,10 @@
 ---
 title: Authentication
-description: Authenticate with ShengSuanYun, CogFoundry, or a compatible custom LoomLoom Server.
+description: Authenticate with ShengSuanYun, CogFoundry, or a compatible custom loomloom Server.
 icon: key-round
 ---
 
-LoomLoom uses a verified Server profile and a credential issued for that environment. Both preset platforms are operational in `v0.2.1`:
+loomloom uses a verified Server profile and a credential issued for that environment. Both preset platforms are operational in `v0.2.1`:
 
 | Platform | Server | Authentication |
 | --- | --- | --- |

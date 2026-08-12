@@ -1,10 +1,10 @@
 ---
 title: Provider Logging
-description: How selected model and tool providers may process LoomLoom workflow data.
+description: How selected model and tool providers may process loomloom workflow data.
 icon: logs
 ---
 
-LoomLoom workflows can call third-party model, API, or tool providers. To execute the requested AI Workload, CogFoundry may transmit the necessary Customer Content and execution metadata to the selected provider.
+loomloom workflows can call third-party model, API, or tool providers. To execute the requested AI Workload, CogFoundry may transmit the necessary Customer Content and execution metadata to the selected provider.
 
 This page is an operational summary. The [full Privacy Policy](https://integration.test.cogfoundry.ai/zh/legal/privacy/) controls the legal terms.
 
@@ -18,7 +18,7 @@ The data depends on the template and selected model or tool. It may include:
 - request settings and the selected model;
 - technical metadata needed to execute, troubleshoot, secure, and account for the request.
 
-LoomLoom should send only the information required by the workflow. A provider does not need every field in your workbook unless those fields are used by the provider-backed step.
+loomloom should send only the information required by the workflow. A provider does not need every field in your workbook unless those fields are used by the provider-backed step.
 
 ## Provider retention and logging
 
@@ -40,6 +40,6 @@ CogFoundry does not train CogFoundry models or third-party models on Customer Co
 
 CogFoundry may retain service logs and execution metadata for security, reliability, billing, troubleshooting, and support. Do not include real tokens or complete workbook payloads when sharing diagnostic output. Remove secrets before opening a support request or GitHub issue.
 
-<Card title="LoomLoom security notes" icon="shield" href="/documentation/loomloom/security-notes">
+<Card title="loomloom security notes" icon="shield" href="/documentation/loomloom/security-notes">
   Review token, endpoint, workbook, artifact URL, confirmation, and retry safeguards.
 </Card>

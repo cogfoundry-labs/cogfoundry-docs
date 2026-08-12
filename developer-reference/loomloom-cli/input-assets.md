@@ -4,7 +4,7 @@ description: Upload reference files and JSONL row inputs without confusing their
 icon: upload
 ---
 
-LoomLoom has two distinct upload mechanisms. Their returned IDs are not interchangeable.
+loomloom has two distinct upload mechanisms. Their returned IDs are not interchangeable.
 
 | Input type | Command | Returned ID | Used for |
 | --- | --- | --- | --- |
@@ -45,4 +45,4 @@ loomloom template-spec precheck <template-id> \
   Never convert an `inputAssetId` into an `inputFileId`, and never guess either ID. Official-template JSON/JSONL commands read the local file directly with `run validate`, `run precheck`, and `run execute`; they do not use `orchestration-input upload`.
 </Warning>
 
-Uploaded content is sent to the configured LoomLoom server. Review sensitive data before upload and follow [Authentication safety](/developer-reference/loomloom-cli/authentication).
+Uploaded content is sent to the configured loomloom server. Review sensitive data before upload and follow [Authentication safety](/developer-reference/loomloom-cli/authentication).

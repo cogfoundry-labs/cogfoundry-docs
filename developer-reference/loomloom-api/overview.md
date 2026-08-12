@@ -1,10 +1,10 @@
 ---
-title: LoomLoom API
-description: Integrate LoomLoom AI work, templates, SkillBots, runs, and results through the CogFoundry HTTP API.
-icon: brackets-curly
+title: loomloom API
+description: Integrate loomloom AI work, templates, SkillBots, runs, and results through the CogFoundry HTTP API.
+icon: braces
 ---
 
-The LoomLoom API is the programmatic interface to the CogFoundry execution environment. Use it to discover executable assets, validate and estimate input, start confirmed runs, and retrieve results.
+The loomloom API is the programmatic interface to the CogFoundry execution environment. Use it to discover executable assets, validate and estimate input, start confirmed runs, and retrieve results.
 
 ```text
 Base URL: https://loomloom.cogfoundry.ai
@@ -47,4 +47,4 @@ Validation, schema inspection, workbook download, precheck, and quote do not cre
   </Card>
 </CardGroup>
 
-The endpoint pages in this module are generated from the repository's OpenAPI 3.1 document. The [LoomLoom CLI reference](/developer-reference/loomloom-cli/overview) remains the source for command-line workflows.
+The endpoint pages in this module are generated from the repository's OpenAPI 3.1 document. The [loomloom CLI reference](/developer-reference/loomloom-cli/overview) remains the source for command-line workflows.

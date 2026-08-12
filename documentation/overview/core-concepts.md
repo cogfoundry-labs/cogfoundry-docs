@@ -1,6 +1,6 @@
 ---
 title: Core Concepts
-description: The objects and terms used throughout CogFoundry and LoomLoom documentation.
+description: The objects and terms used throughout CogFoundry and loomloom documentation.
 icon: boxes
 ---
 
@@ -10,19 +10,19 @@ icon: boxes
 
 The smallest production unit that can contain multiple model calls, API calls, tool executions, or workflow steps.
 
-### LoomLoom
+### loomloom
 
-An AI work compiler and runtime. LoomLoom turns AI work into reusable intermediate representation, compiles it for execution, and returns observable runs, result rows, workbooks, and artifacts.
+An AI work compiler and runtime. loomloom turns AI work into reusable intermediate representation, compiles it for execution, and returns observable runs, result rows, workbooks, and artifacts.
 
 ### Reusable AI work IR
 
-The typed intermediate representation of a LoomLoom workflow: inputs, steps, dependencies, execution policies, model use, and expected outputs. TemplateSpec is the source format used to define private AI work IR.
+The typed intermediate representation of a loomloom workflow: inputs, steps, dependencies, execution policies, model use, and expected outputs. TemplateSpec is the source format used to define private AI work IR.
 
 ### SkillCompiler
 
-The reference compiler integrated into the LoomLoom CLI. It transforms AI work into reusable IR and a compiled execution system.
+The reference compiler integrated into the loomloom CLI. It transforms AI work into reusable IR and a compiled execution system.
 
-## LoomLoom workflow objects
+## loomloom workflow objects
 
 ```text
 Official template ── platform-maintained and executed directly

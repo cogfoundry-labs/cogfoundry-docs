@@ -1,6 +1,6 @@
 ---
 title: API Authentication
-description: Authenticate LoomLoom API requests with a CogFoundry API token.
+description: Authenticate loomloom API requests with a CogFoundry API token.
 icon: key-round
 ---
 

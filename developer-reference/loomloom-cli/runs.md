@@ -1,6 +1,6 @@
 ---
 title: Runs
-description: Create, list, monitor, and inspect LoomLoom workflow runs.
+description: Create, list, monitor, and inspect loomloom workflow runs.
 icon: activity
 ---
 

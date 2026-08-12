@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Run an official LoomLoom workflow from an Excel workbook.
+description: Run an official loomloom workflow from an Excel workbook.
 icon: rocket
 ---
 

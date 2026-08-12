@@ -1,6 +1,6 @@
 ---
 title: Market for Users
-description: Discover, quote, and run LoomLoom Market SkillBots as a buyer.
+description: Discover, quote, and run loomloom Market SkillBots as a buyer.
 icon: store
 ---
 

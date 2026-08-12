@@ -1,6 +1,6 @@
 ---
 title: Doctor
-description: Diagnose LoomLoom configuration, connectivity, authentication, and release state.
+description: Diagnose loomloom configuration, connectivity, authentication, and release state.
 icon: stethoscope
 ---
 

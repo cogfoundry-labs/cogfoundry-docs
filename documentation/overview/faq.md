@@ -1,11 +1,11 @@
 ---
 title: FAQ
-description: Common questions about CogFoundry, LoomLoom, models, execution, and data handling.
-icon: circle-help
+description: Common questions about CogFoundry, loomloom, models, execution, and data handling.
+icon: book-open
 ---
 
 <AccordionGroup>
-  <Accordion title="Which LoomLoom release do these docs cover?" icon="tags">
+  <Accordion title="Which loomloom release do these docs cover?" icon="tags">
     These docs cover the `v0.2.1` public beta release. Use `loomloom <command> --help` as the source of truth for the version installed on your machine.
   </Accordion>
 
@@ -20,7 +20,7 @@ icon: circle-help
     Both preset platforms support browser login and API Tokens. A compatible custom Server may also be registered with an API Token after `doctor` verifies it.
   </Accordion>
 
-  <Accordion title="Do I need an AI coding agent to use LoomLoom?" icon="bot">
+  <Accordion title="Do I need an AI coding agent to use loomloom?" icon="bot">
     No. You can use the CLI directly. Optional integrations are available for Codex, Claude Code, and OpenClaw.
   </Accordion>
 
@@ -37,7 +37,7 @@ icon: circle-help
   </Accordion>
 
   <Accordion title="Is execution local?" icon="cloud">
-    No. The CLI runs locally, but confirmed workflows are executed by the configured remote LoomLoom service. A local Agent Skill is a wrapper and does not copy hidden prompts or server-side execution logic.
+    No. The CLI runs locally, but confirmed workflows are executed by the configured remote loomloom service. A local Agent Skill is a wrapper and does not copy hidden prompts or server-side execution logic.
   </Accordion>
 
   <Accordion title="Is Customer Content used to train models?" icon="shield-check">
@@ -45,6 +45,6 @@ icon: circle-help
   </Accordion>
 
   <Accordion title="Where do I report a problem?" icon="bug">
-    Run `loomloom doctor`, remove secrets from the output, and open an issue in the [LoomLoom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues).
+    Run `loomloom doctor`, remove secrets from the output, and open an issue in the [loomloom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues).
   </Accordion>
 </AccordionGroup>

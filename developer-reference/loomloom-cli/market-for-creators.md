@@ -1,6 +1,6 @@
 ---
 title: Market for Creators
-description: Publish and manage private-template versions as LoomLoom SkillBots.
+description: Publish and manage private-template versions as loomloom SkillBots.
 icon: badge-dollar-sign
 ---
 

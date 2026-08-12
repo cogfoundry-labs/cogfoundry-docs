@@ -3,12 +3,12 @@
 This GitHub repository is the single source of truth and Mintlify deployment source for CogFoundry documentation.
 
 - Documentation source: https://github.com/cogfoundry-labs/cogfoundry-docs
-- LoomLoom product source: https://github.com/cogfoundry-labs/loomloom
+- loomloom product source: https://github.com/cogfoundry-labs/loomloom
 
 ## Content structure
 
 - `documentation/` — Product documentation, concepts, guides, and privacy information.
-- `developer-reference/` — LoomLoom API, CLI, TemplateSpec, and developer-facing operational references.
+- `developer-reference/` — loomloom API, CLI, TemplateSpec, and developer-facing operational references.
 - `assets/` — Shared logos and documentation assets.
 - `docs.json` — Mintlify navigation, branding, and site configuration.
 - `style.css` — Global Mintlify styling overrides.

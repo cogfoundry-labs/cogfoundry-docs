@@ -1,6 +1,6 @@
 ---
 title: Run and monitor workflows
-description: Track a LoomLoom run from submission through its terminal status.
+description: Track a loomloom run from submission through its terminal status.
 icon: activity
 ---
 
@@ -19,7 +19,7 @@ loomloom run get <run-id>
 loomloom run list
 ```
 
-There is no documented URL pattern for a LoomLoom run detail page. Do not construct one from the run ID; use the CLI unless the service explicitly returns a URL.
+There is no documented URL pattern for a loomloom run detail page. Do not construct one from the run ID; use the CLI unless the service explicitly returns a URL.
 
 ## Run statuses
 

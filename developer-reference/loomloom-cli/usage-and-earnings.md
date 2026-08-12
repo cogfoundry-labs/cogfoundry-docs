@@ -1,6 +1,6 @@
 ---
 title: Usage and Earnings
-description: Inspect Market buyer transactions and creator earnings in the LoomLoom CLI.
+description: Inspect Market buyer transactions and creator earnings in the loomloom CLI.
 icon: receipt-text
 ---
 

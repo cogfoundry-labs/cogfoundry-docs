@@ -1,7 +1,7 @@
 ---
 title: Create reusable AI work IR
 description: Define, check, create, version, and execute private AI work IR with TemplateSpec.
-icon: file-code-2
+icon: blocks
 ---
 
 A private template is reusable AI work IR that you create and maintain. Its source definition is a TemplateSpec JSON file, and each change becomes a new immutable version.

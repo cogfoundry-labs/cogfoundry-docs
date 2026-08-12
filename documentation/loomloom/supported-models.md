@@ -1,13 +1,13 @@
 ---
 title: Supported Models
-description: Text, image, and video models currently available to LoomLoom workflows.
+description: Text, image, and video models currently available to loomloom workflows.
 icon: blocks
 ---
 
-LoomLoom exposes a model catalog for the execution units used by official and private templates. The current catalog contains **12 text-generation models, 4 image-generation models, and 3 video-generation models**.
+loomloom exposes a model catalog for the execution units used by official and private templates. The current catalog contains **12 text-generation models, 4 image-generation models, and 3 video-generation models**.
 
 <Warning>
-  This is a snapshot verified on July 20, 2026. Availability can change by environment, region, permissions, and provider status. Query the active LoomLoom service before creating or running a workflow.
+  This is a snapshot verified on July 20, 2026. Availability can change by environment, region, permissions, and provider status. Query the active loomloom service before creating or running a workflow.
 </Warning>
 
 ## Check the live catalog

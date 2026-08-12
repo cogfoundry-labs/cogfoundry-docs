@@ -49,7 +49,7 @@
             ]
           },
           {
-            "group": "LoomLoom",
+            "group": "loomloom",
             "pages": [
               "documentation/loomloom/overview",
               "documentation/loomloom/why-ai-loops"
@@ -72,7 +72,7 @@
             ]
           },
           {
-            "group": "Operate LoomLoom",
+            "group": "Operate loomloom",
             "pages": [
               "documentation/loomloom/supported-agents",
               "documentation/loomloom/supported-models",
@@ -106,22 +106,7 @@
         "icon": "code",
         "groups": [
           {
-            "group": "LoomLoom API",
-            "pages": [
-              "developer-reference/loomloom-api/overview",
-              "developer-reference/loomloom-api/authentication",
-              "developer-reference/loomloom-api/quickstart"
-            ]
-          },
-          {
-            "group": "LoomLoom API endpoints",
-            "openapi": {
-              "source": "developer-reference/loomloom-api/openapi.json",
-              "directory": "developer-reference/loomloom-api/endpoints"
-            }
-          },
-          {
-            "group": "LoomLoom CLI",
+            "group": "loomloom CLI",
             "pages": [
               "developer-reference/loomloom-cli/overview",
               "developer-reference/loomloom-cli/command-help",
@@ -150,6 +135,21 @@
             "pages": [
               "developer-reference/template-spec/overview"
             ]
+          },
+          {
+            "group": "loomloom API",
+            "pages": [
+              "developer-reference/loomloom-api/overview",
+              "developer-reference/loomloom-api/authentication",
+              "developer-reference/loomloom-api/quickstart"
+            ]
+          },
+          {
+            "group": "loomloom API endpoints",
+            "openapi": {
+              "source": "developer-reference/loomloom-api/openapi.json",
+              "directory": "developer-reference/loomloom-api/endpoints"
+            }
           }
         ]
       }
@@ -181,7 +181,7 @@
     "primary": {
       "type": "button",
       "label": "CogFoundry",
-      "href": "https://cogfoundry.ai/"
+      "href": "https://console.cogfoundry.ai/"
     }
   },
   "contextual": {
@@ -205,7 +205,7 @@
         "header": "Source",
         "items": [
           {
-            "label": "LoomLoom",
+            "label": "loomloom",
             "href": "https://github.com/cogfoundry-labs/loomloom"
           },
           {

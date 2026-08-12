@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Diagnose common LoomLoom installation, authentication, input, and run problems.
+description: Diagnose common loomloom installation, authentication, input, and run problems.
 icon: wrench
 ---
 
@@ -12,7 +12,7 @@ Start by identifying whether the failure is local input, authentication, service
 loomloom --version
 ```
 
-If the command is unavailable, reinstall LoomLoom and ensure its install directory is on `PATH`. Confirm the installed version before comparing its command set with these docs.
+If the command is unavailable, reinstall loomloom and ensure its install directory is on `PATH`. Confirm the installed version before comparing its command set with these docs.
 
 ## Authentication, server, or network error
 
@@ -77,4 +77,4 @@ For Market calls, also inspect the usage record. For publishing changes, inspect
 
 ## Where to report a reproducible issue
 
-Open an issue in the [LoomLoom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues). Include the CLI version, operating system, sanitized `doctor` output, the command shape, and the error message. Remove tokens, Customer Content, signed URLs, and other sensitive values.
+Open an issue in the [loomloom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues). Include the CLI version, operating system, sanitized `doctor` output, the command shape, and the error message. Remove tokens, Customer Content, signed URLs, and other sensitive values.

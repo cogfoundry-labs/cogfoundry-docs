@@ -1,10 +1,10 @@
 ---
 title: Configure credentials
-description: Choose a LoomLoom platform, authenticate, and verify the active Server safely.
+description: Choose a loomloom platform, authenticate, and verify the active Server safely.
 icon: key-round
 ---
 
-LoomLoom `v0.2.1` provides two preset platforms. Choose the platform that owns your account and credential; do not infer the platform from your language, location, or download source.
+loomloom `v0.2.1` provides two preset platforms. Choose the platform that owns your account and credential; do not infer the platform from your language, location, or download source.
 
 | Platform | Server | Authentication | Account links |
 | --- | --- | --- | --- |
@@ -60,7 +60,7 @@ A custom compatible Server is allowed. Pass its exact HTTPS URL and correspondin
 An API key is issued for a particular service environment. Do not reuse it with a different host.
 
 <Warning>
-  Send any LoomLoom Token only to the exact Server that issued it, and only over HTTPS. Do not place a real Token in source control, documentation, screenshots, issue reports, or shared logs.
+  Send any loomloom Token only to the exact Server that issued it, and only over HTTPS. Do not place a real Token in source control, documentation, screenshots, issue reports, or shared logs.
 </Warning>
 
 Use [Server profiles](/developer-reference/loomloom-cli/server-profiles) to list or switch verified environments. `loomloom logout` removes a saved browser credential only; it does not remove an API Token from your shell configuration.

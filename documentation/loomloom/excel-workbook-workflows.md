@@ -1,10 +1,10 @@
 ---
 title: Excel workbook workflows
-description: Prepare, validate, estimate, and submit LoomLoom workflows from Excel.
+description: Prepare, validate, estimate, and submit loomloom workflows from Excel.
 icon: sheet
 ---
 
-Workbooks are the recommended input experience for LoomLoom. They keep the expected fields, input rows, row-level results, and errors in a format that users can inspect before and after execution.
+Workbooks are the recommended input experience for loomloom. They keep the expected fields, input rows, row-level results, and errors in a format that users can inspect before and after execution.
 
 ## One row, one AI Workload
 
@@ -51,5 +51,5 @@ loomloom run result-workbook <run-id> --output-file ./result.xlsx
 The result workbook is generated from the server-side input snapshot and aligns outputs with the submitted rows. Prefer it over the legacy local backfill command.
 
 <Warning>
-  Workbook contents are transferred to the configured LoomLoom server. Do not print complete encoded request payloads or store temporary signed result URLs in long-lived logs.
+  Workbook contents are transferred to the configured loomloom server. Do not print complete encoded request payloads or store temporary signed result URLs in long-lived logs.
 </Warning>

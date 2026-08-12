@@ -1,6 +1,6 @@
 ---
 title: Exit Codes
-description: Handle LoomLoom CLI process status safely in scripts and agents.
+description: Handle loomloom CLI process status safely in scripts and agents.
 icon: binary
 ---
 

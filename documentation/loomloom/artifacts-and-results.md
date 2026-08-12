@@ -1,10 +1,10 @@
 ---
 title: Artifacts and results
-description: Retrieve row results, result workbooks, and generated files from a LoomLoom run.
+description: Retrieve row results, result workbooks, and generated files from a loomloom run.
 icon: package-open
 ---
 
-LoomLoom exposes three complementary result views. Use the run ID returned at submission to retrieve each one.
+loomloom exposes three complementary result views. Use the run ID returned at submission to retrieve each one.
 
 | Result | Best for | Command |
 | --- | --- | --- |

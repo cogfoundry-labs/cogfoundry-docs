@@ -4,7 +4,7 @@ description: Understand official templates, private templates, versions, and Mar
 icon: panels-top-left
 ---
 
-A LoomLoom template is reusable AI work IR: it defines structured inputs, execution steps, dependencies, model use, and expected outputs. Combine a template with workbook or programmatic row input to create a run.
+A loomloom template is reusable AI work IR: it defines structured inputs, execution steps, dependencies, model use, and expected outputs. Combine a template with workbook or programmatic row input to create a run.
 
 ## Template types
 
