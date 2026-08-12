@@ -1,6 +1,6 @@
 ---
 title: Private Templates and TemplateSpec
-description: Author, version, validate, and execute private LoomLoom workflows.
+description: Author, version, validate, and execute private loomloom workflows.
 icon: workflow
 ---
 

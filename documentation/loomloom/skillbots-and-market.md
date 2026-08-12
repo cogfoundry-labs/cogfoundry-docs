@@ -4,7 +4,7 @@ description: Package private AI work IR as a deployable SkillBot, or discover an
 icon: store
 ---
 
-A SkillBot is a deployable, modular AI system packaged from an immutable execution snapshot of an approved private template version. The LoomLoom Market lets users discover SkillBots and lets creators submit their own compiled AI work for review.
+A SkillBot is a deployable, modular AI system packaged from an immutable execution snapshot of an approved private template version. The loomloom Market lets users discover SkillBots and lets creators submit their own compiled AI work for review.
 
 ```text
 Private template version
@@ -70,7 +70,7 @@ loomloom skill install market <listing-id> \
   --output json
 ```
 
-The generated local Skill is a usage wrapper. It records the public inputs and safe LoomLoom flow; it does not copy hidden server-side logic, credentials, or model settings. Installation does not quote or execute the SkillBot, and each future run still requires a current quote and explicit confirmation.
+The generated local Skill is a usage wrapper. It records the public inputs and safe loomloom flow; it does not copy hidden server-side logic, credentials, or model settings. Installation does not quote or execute the SkillBot, and each future run still requires a current quote and explicit confirmation.
 
 Generated Skill names use the `loomloom-` prefix, and the output-directory name must match the Skill name returned by the dry run.
 

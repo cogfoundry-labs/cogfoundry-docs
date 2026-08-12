@@ -1,6 +1,6 @@
 ---
 title: API Quickstart
-description: Discover an official template, prepare a confirmed run, and retrieve LoomLoom results through the API.
+description: Discover an official template, prepare a confirmed run, and retrieve loomloom results through the API.
 icon: rocket
 ---
 

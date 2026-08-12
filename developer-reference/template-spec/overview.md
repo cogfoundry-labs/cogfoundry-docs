@@ -1,10 +1,10 @@
 ---
 title: TemplateSpec
 description: Define reusable AI work IR with typed inputs, steps, dependencies, models, and outputs.
-icon: file-code-2
+icon: blocks
 ---
 
-TemplateSpec is the source format used to define a private LoomLoom template. The resulting template is reusable AI work IR: an immutable, inspectable definition of the inputs, execution steps, dependencies, models, and expected outputs required to produce an outcome.
+TemplateSpec is the source format used to define a private loomloom template. The resulting template is reusable AI work IR: an immutable, inspectable definition of the inputs, execution steps, dependencies, models, and expected outputs required to produce an outcome.
 
 ## Start with the version shipped in the CLI
 
@@ -43,7 +43,7 @@ Creating a template or adding a version changes remote state and requires explic
 New templates and versions must not use `bindMode=expanded`. Put dynamic independent items on separate workbook rows. Model a fixed number of parallel branches as separate steps connected through `dependsOn` and `upstreamBindings`.
 
 <Card title="Read the source manual" icon="github" href="https://github.com/cogfoundry-labs/loomloom/tree/main/docs/template-spec/en">
-  Browse the English TemplateSpec manual maintained with the LoomLoom source.
+  Browse the English TemplateSpec manual maintained with the loomloom source.
 </Card>
 
 <Card title="Create reusable AI work IR" icon="workflow" href="/documentation/loomloom/private-templates">

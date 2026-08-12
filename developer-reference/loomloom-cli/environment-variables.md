@@ -1,6 +1,6 @@
 ---
 title: Environment Variables
-description: Configure the LoomLoom CLI through environment variables.
+description: Configure the loomloom CLI through environment variables.
 icon: variable
 ---
 

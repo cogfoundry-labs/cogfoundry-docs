@@ -1,15 +1,15 @@
 ---
-title: LoomLoom overview
+title: loomloom overview
 description: Compile, package, execute, and manage AI work as reusable software.
 icon: workflow
 ---
 
-LoomLoom is an **AI work compiler and runtime**. It enables developers and AI agents to define the inputs, logic, capabilities, and expected outputs required to produce an outcome, then compile that work into reusable AI systems.
+loomloom is an **AI work compiler and runtime**. It enables developers and AI agents to define the inputs, logic, capabilities, and expected outputs required to produce an outcome, then compile that work into reusable AI systems.
 
-AI work can range from a prompt or skill to a multi-step system containing instructions, tools, workflows, and generated artifacts. LoomLoom provides the toolchain to version, execute, maintain, and distribute it like software.
+AI work can range from a prompt or skill to a multi-step system containing instructions, tools, workflows, and generated artifacts. loomloom provides the toolchain to version, execute, maintain, and distribute it like software.
 
 <Columns cols={3}>
-  <Card title="AI work IR" icon="file-code-2" href="/documentation/loomloom/private-templates">
+  <Card title="AI work IR" icon="blocks" href="/documentation/loomloom/private-templates">
     Define typed inputs, steps, dependencies, models, and outputs in a reusable template.
   </Card>
   <Card title="SkillBots" icon="bot" href="/documentation/loomloom/skillbots-and-market">
@@ -20,9 +20,9 @@ AI work can range from a prompt or skill to a multi-step system containing instr
   </Card>
 </Columns>
 
-## How LoomLoom works
+## How loomloom works
 
-LoomLoom applies a compiler-style pipeline to AI work:
+loomloom applies a compiler-style pipeline to AI work:
 
 ```text
 AI work
@@ -37,7 +37,7 @@ AI work
 
 | Component | Role |
 | --- | --- |
-| LoomLoom CLI | Developer interface for defining, compiling, executing, debugging, packaging, and managing AI work. |
+| loomloom CLI | Developer interface for defining, compiling, executing, debugging, packaging, and managing AI work. |
 | Reusable AI work IR | Typed intermediate representation of workflow steps, dependencies, execution policies, model use, and expected outputs. |
 | SkillCompiler | Reference compiler that transforms AI work into reusable IR and an executable system. |
 | SkillBot | Deployable, modular AI system packaged from an immutable execution snapshot. |
@@ -53,14 +53,14 @@ AI work
 - Install a private template or Market SkillBot as a local Agent Skill wrapper for Codex, Claude Code, or OpenClaw.
 
 <Note>
-  LoomLoom is currently in beta. Implemented behavior is documented here; architecture and design details may continue to evolve through public releases.
+  loomloom is currently in beta. Implemented behavior is documented here; architecture and design details may continue to evolve through public releases.
 </Note>
 
 The CLI can be used directly. Agent integrations add guided planning, input collection, and confirmation around the same deterministic commands.
 
 ## Start here
 
-1. [Install LoomLoom](/documentation/loomloom/installation).
+1. [Install loomloom](/documentation/loomloom/installation).
 2. [Configure your credentials](/documentation/loomloom/configure-credentials).
 3. Complete the [Quick Start](/documentation/loomloom/quick-start) or browse the [main workflows](/documentation/loomloom/workflows).
 4. Review [Security Notes](/documentation/loomloom/security-notes) before using production data.

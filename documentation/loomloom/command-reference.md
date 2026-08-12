@@ -1,6 +1,6 @@
 ---
 title: Command reference
-description: Find the LoomLoom CLI command group for each user workflow.
+description: Find the loomloom CLI command group for each user workflow.
 icon: terminal
 ---
 
@@ -70,4 +70,4 @@ For Excel input, continue to use `template validate-file → template precheck-f
 
 Discovery, downloads, uploads, validation, precheck, and quote are preparation steps. Commands that create a hosted run or change remote resources require explicit confirmation after the user has seen the current action and, for a run, its fee estimate.
 
-See the complete [LoomLoom CLI developer reference](/developer-reference/loomloom-cli/overview).
+See the complete [loomloom CLI developer reference](/developer-reference/loomloom-cli/overview).

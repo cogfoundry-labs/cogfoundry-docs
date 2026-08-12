@@ -1,10 +1,10 @@
 ---
-title: LoomLoom workflows
+title: loomloom workflows
 description: Follow the supported end-to-end paths for official templates, reusable AI work IR, and SkillBots.
 icon: route
 ---
 
-LoomLoom supports five primary workflows. Each one uses the active verified Server profile and preserves the separation between preparation and execution.
+loomloom supports five primary workflows. Each one uses the active verified Server profile and preserves the separation between preparation and execution.
 
 If more than one profile exists, select the intended environment first:
 

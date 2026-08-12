@@ -1,6 +1,6 @@
 ---
 title: Money Units and Confirmation
-description: Interpret LoomLoom amounts and implement the required paid-execution gate.
+description: Interpret loomloom amounts and implement the required paid-execution gate.
 icon: circle-dollar-sign
 ---
 

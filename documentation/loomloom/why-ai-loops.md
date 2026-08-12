@@ -6,7 +6,7 @@ icon: binary
 
 AI work is the combination of inputs, instructions, capabilities, workflow logic, and expected outputs required to produce an outcome. Developers, AI agents, or both can create it.
 
-LoomLoom treats AI work the way a traditional compiler treats source code:
+loomloom treats AI work the way a traditional compiler treats source code:
 
 ```text
 source AI work
@@ -54,7 +54,7 @@ A SkillBot is a deployable, modular AI system. The source private template remai
 
 ## What structure adds
 
-| Need | LoomLoom approach |
+| Need | loomloom approach |
 | --- | --- |
 | Reusable definition | Versioned TemplateSpec and typed AI work IR |
 | Early error detection | Workbook validation before submission |
@@ -63,7 +63,7 @@ A SkillBot is a deployable, modular AI system. The source private template remai
 | Distribution | Immutable SkillBot versions and local Agent Skill wrappers |
 | File output | Result workbooks and downloadable artifacts |
 
-Not every AI interaction needs compilation. A one-off prompt remains useful for exploration. Use LoomLoom when the work needs reusable structure, explicit execution semantics, versioning, visibility, or distribution.
+Not every AI interaction needs compilation. A one-off prompt remains useful for exploration. Use loomloom when the work needs reusable structure, explicit execution semantics, versioning, visibility, or distribution.
 
 <Tip>
   Start with an [official template](/documentation/loomloom/official-templates), or [create reusable AI work IR](/documentation/loomloom/private-templates) when the existing workflow does not match your process.

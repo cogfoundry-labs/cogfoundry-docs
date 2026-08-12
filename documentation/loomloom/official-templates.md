@@ -1,6 +1,6 @@
 ---
 title: Official templates
-description: Discover and run CogFoundry-maintained LoomLoom workflows.
+description: Discover and run CogFoundry-maintained loomloom workflows.
 icon: badge-check
 ---
 

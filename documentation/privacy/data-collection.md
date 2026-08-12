@@ -4,7 +4,7 @@ description: A product-focused summary of the data CogFoundry processes and why.
 icon: shield-check
 ---
 
-This page summarizes how data is handled when you use CogFoundry services, including LoomLoom. It is not a replacement for the [full Privacy Policy](https://integration.test.cogfoundry.ai/zh/legal/privacy/), last updated June 30, 2026. If this summary differs from the policy, the policy controls.
+This page summarizes how data is handled when you use CogFoundry services, including loomloom. It is not a replacement for the [full Privacy Policy](https://integration.test.cogfoundry.ai/zh/legal/privacy/), last updated June 30, 2026. If this summary differs from the policy, the policy controls.
 
 ## Data you provide
 
@@ -35,7 +35,7 @@ The policy states that the current launch stage does not use optional analytics 
 
 Data is processed to:
 
-- operate accounts and provide LoomLoom workflows;
+- operate accounts and provide loomloom workflows;
 - route Customer Content to selected models, APIs, or tools;
 - return outputs, result workbooks, and artifacts;
 - estimate and settle usage, Credits, and Marketplace transactions;

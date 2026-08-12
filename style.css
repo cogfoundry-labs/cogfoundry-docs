@@ -9,18 +9,18 @@
   border-bottom: 1px solid var(--cogfoundry-border);
 }
 
-#navbar nav a[href="https://cogfoundry.ai/"] {
+#navbar nav a[href="https://console.cogfoundry.ai/"] {
   color: #ffffff !important;
   background: #111111 !important;
   border-radius: 10px;
 }
 
-#navbar nav a[href="https://cogfoundry.ai/"] span,
-#navbar nav a[href="https://cogfoundry.ai/"] svg {
+#navbar nav a[href="https://console.cogfoundry.ai/"] span,
+#navbar nav a[href="https://console.cogfoundry.ai/"] svg {
   color: #ffffff !important;
 }
 
-#navbar nav a[href="https://cogfoundry.ai/"] > span:first-child {
+#navbar nav a[href="https://console.cogfoundry.ai/"] > span:first-child {
   background: #111111 !important;
 }
 
@@ -83,16 +83,16 @@ code-block {
   --cogfoundry-muted: #a3a3a3;
 }
 
-.dark #navbar nav a[href="https://cogfoundry.ai/"] {
+.dark #navbar nav a[href="https://console.cogfoundry.ai/"] {
   color: #111111 !important;
   background: #ffffff !important;
 }
 
-.dark #navbar nav a[href="https://cogfoundry.ai/"] span,
-.dark #navbar nav a[href="https://cogfoundry.ai/"] svg {
+.dark #navbar nav a[href="https://console.cogfoundry.ai/"] span,
+.dark #navbar nav a[href="https://console.cogfoundry.ai/"] svg {
   color: #111111 !important;
 }
 
-.dark #navbar nav a[href="https://cogfoundry.ai/"] > span:first-child {
+.dark #navbar nav a[href="https://console.cogfoundry.ai/"] > span:first-child {
   background: #ffffff !important;
 }

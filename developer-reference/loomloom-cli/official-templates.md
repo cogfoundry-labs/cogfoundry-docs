@@ -1,6 +1,6 @@
 ---
 title: Official Templates
-description: Discover and execute platform-maintained LoomLoom templates through workbooks or row files.
+description: Discover and execute platform-maintained loomloom templates through workbooks or row files.
 icon: layout-template
 ---
 

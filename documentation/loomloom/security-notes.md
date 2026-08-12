@@ -1,10 +1,10 @@
 ---
 title: Security notes
-description: Protect credentials, workflow inputs, results, and paid execution in LoomLoom.
+description: Protect credentials, workflow inputs, results, and paid execution in loomloom.
 icon: shield-check
 ---
 
-LoomLoom sends workflow input to the configured service for hosted execution. Apply the following controls before using sensitive or production data.
+loomloom sends workflow input to the configured service for hosted execution. Apply the following controls before using sensitive or production data.
 
 ## Protect the token boundary
 

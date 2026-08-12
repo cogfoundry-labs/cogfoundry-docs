@@ -1,10 +1,10 @@
 ---
 title: Server Profiles
-description: Register, inspect, switch, and remove verified LoomLoom Server profiles.
-icon: servers
+description: Register, inspect, switch, and remove verified loomloom Server profiles.
+icon: server
 ---
 
-LoomLoom `v0.2.1` stores verified Server profiles locally so one CLI installation can work with ShengSuanYun, CogFoundry, or a compatible custom Server without mixing credentials.
+loomloom `v0.2.1` stores verified Server profiles locally so one CLI installation can work with ShengSuanYun, CogFoundry, or a compatible custom Server without mixing credentials.
 
 ## Register a Server
 
@@ -25,7 +25,7 @@ You may add `--name <profile-name>` to choose a lowercase profile name. Otherwis
 - `token_env`: profile-specific Token environment variable;
 - `next_action`: whether the Token still needs to be persisted.
 
-If verification fails, LoomLoom does not save or activate the new Server.
+If verification fails, loomloom does not save or activate the new Server.
 
 ## List profiles
 

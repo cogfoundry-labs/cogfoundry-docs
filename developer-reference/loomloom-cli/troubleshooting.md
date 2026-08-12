@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Diagnose common LoomLoom CLI setup, input, execution, and local Skill failures.
+description: Diagnose common loomloom CLI setup, input, execution, and local Skill failures.
 icon: wrench
 ---
 
@@ -53,7 +53,7 @@ If a dry run returns `output_dir_name_mismatch`, append the returned `skillName`
 
 ## Report a reproducible issue
 
-Open an issue in the [LoomLoom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues) with:
+Open an issue in the [loomloom GitHub repository](https://github.com/cogfoundry-labs/loomloom/issues) with:
 
 - CLI version
 - operating system and architecture

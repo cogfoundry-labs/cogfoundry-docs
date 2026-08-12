@@ -1,20 +1,20 @@
 ---
-title: LoomLoom CLI
-description: Command-line reference for installing, configuring, and using LoomLoom.
+title: loomloom CLI
+description: Command-line reference for installing, configuring, and using loomloom.
 icon: terminal
 ---
 
 <Note>
-  This reference covers LoomLoom `v0.2.1`. Use `loomloom <command> --help` as the syntax source of truth for your installed version.
+  This reference covers loomloom `v0.2.1`. Use `loomloom <command> --help` as the syntax source of truth for your installed version.
 </Note>
 
-The LoomLoom CLI connects local files and developer tools to hosted LoomLoom workflows. It supports browser or API Token authentication, verified Server profiles, official templates, private TemplateSpec versions, Market SkillBots, run monitoring, and result retrieval.
+The loomloom CLI connects local files and developer tools to hosted loomloom workflows. It supports browser or API Token authentication, verified Server profiles, official templates, private TemplateSpec versions, Market SkillBots, run monitoring, and result retrieval.
 
 This reference documents the currently implemented CLI behavior.
 
 ## Start here
 
-1. [Install LoomLoom](/documentation/loomloom/installation).
+1. [Install loomloom](/documentation/loomloom/installation).
 2. [Choose a platform and authenticate](/developer-reference/loomloom-cli/authentication).
 3. Verify the active environment:
 

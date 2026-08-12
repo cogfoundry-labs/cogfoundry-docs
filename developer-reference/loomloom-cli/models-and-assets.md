@@ -1,6 +1,6 @@
 ---
 title: Models and Executable Assets
-description: Query the model catalog and the current user's executable LoomLoom assets.
+description: Query the model catalog and the current user's executable loomloom assets.
 icon: boxes
 ---
 

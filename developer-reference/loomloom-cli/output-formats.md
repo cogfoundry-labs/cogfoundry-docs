@@ -1,6 +1,6 @@
 ---
 title: Output Formats
-description: Choose human-readable or machine-readable LoomLoom CLI output.
+description: Choose human-readable or machine-readable loomloom CLI output.
 icon: braces
 ---
 

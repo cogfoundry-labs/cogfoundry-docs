@@ -1,10 +1,10 @@
 ---
-title: Install LoomLoom
-description: Install the LoomLoom CLI and its integration package from GitHub.
+title: Install loomloom
+description: Install the loomloom CLI and its integration package from GitHub.
 icon: download
 ---
 
-The LoomLoom CLI is the developer interface for defining, compiling, executing, and managing AI work as software. The official installer also installs the integration package for one supported agent. These docs cover the `v0.2.1` public beta release.
+The loomloom CLI is the developer interface for defining, compiling, executing, and managing AI work as software. The official installer also installs the integration package for one supported agent. These docs cover the `v0.2.1` public beta release.
 
 <Note>
   Running the installer without `--version` resolves the latest stable release. Use `--channel beta` when you explicitly want the newest beta build.
@@ -69,5 +69,5 @@ loomloom doctor --output json
 The agent package uses a small core Skill plus focused reference modules for setup, execution, billing, TemplateSpec, Market, local Skills, and CLI error handling. The installer places the complete package for the selected agent.
 
 <Info>
-  GitHub is the default distribution source. Choosing GitHub or an explicitly requested Gitee mirror does not select a LoomLoom platform, Server, or credential.
+  GitHub is the default distribution source. Choosing GitHub or an explicitly requested Gitee mirror does not select a loomloom platform, Server, or credential.
 </Info>

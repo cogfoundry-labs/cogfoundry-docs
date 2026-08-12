@@ -1,16 +1,16 @@
 ---
 title: Local Agent Skills
-description: Use the modular LoomLoom Skill and install template-specific wrappers for supported agents.
+description: Use the modular loomloom Skill and install template-specific wrappers for supported agents.
 icon: bot
 ---
 
-LoomLoom supports local Agent Skills for exactly three targets: `codex`, `claude`, and `openclaw`.
+loomloom supports local Agent Skills for exactly three targets: `codex`, `claude`, and `openclaw`.
 
-## Modular LoomLoom Skill
+## Modular loomloom Skill
 
-The current release packages one LoomLoom Skill per supported agent. Its entry file routes the agent to focused references for setup, execution, billing, Market, TemplateSpec, local Skill management, and CLI recovery. The package also includes generated English and Chinese TemplateSpec reference material and machine-readable validation rules.
+The current release packages one loomloom Skill per supported agent. Its entry file routes the agent to focused references for setup, execution, billing, Market, TemplateSpec, local Skill management, and CLI recovery. The package also includes generated English and Chinese TemplateSpec reference material and machine-readable validation rules.
 
-This modular package is installed with LoomLoom. It guides agent behavior; it is not a local workflow runtime and does not itself execute an AI Workload.
+This modular package is installed with loomloom. It guides agent behavior; it is not a local workflow runtime and does not itself execute an AI Workload.
 
 ## Install a template-specific wrapper
 

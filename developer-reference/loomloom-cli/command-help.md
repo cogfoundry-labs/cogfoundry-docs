@@ -1,7 +1,7 @@
 ---
 title: Command Help
-description: Inspect LoomLoom commands, flags, and the current command tree.
-icon: circle-help
+description: Inspect loomloom commands, flags, and the current command tree.
+icon: book-open
 ---
 
 Use the CLI's built-in help as the source of truth for the version installed on your machine.
@@ -25,7 +25,7 @@ loomloom template-spec docs --help
 
 | Flag | Default | Purpose |
 | --- | --- | --- |
-| `-s, --server <url>` | Configured server | Override the LoomLoom base URL for this invocation |
+| `-s, --server <url>` | Configured server | Override the loomloom base URL for this invocation |
 | `-t, --token <token>` | Configured token | Override the bearer token; prefer `LOOMLOOM_TOKEN` to avoid shell history exposure |
 | `--timeout <duration>` | `30s` | Set the HTTP request timeout |
 | `-o, --output <format>` | `text` | Select `text` or `json` |

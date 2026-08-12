@@ -1,10 +1,10 @@
 ---
 title: Supported agents
-description: Use LoomLoom with Codex, Claude Code, OpenClaw, or directly from the CLI.
+description: Use loomloom with Codex, Claude Code, OpenClaw, or directly from the CLI.
 icon: bot
 ---
 
-LoomLoom currently provides integration packages for three agents.
+loomloom currently provides integration packages for three agents.
 
 | Agent | Installer value | Status |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ The default installation targets Codex. Select a different package with the inst
 
 ## Agent integration is optional
 
-The LoomLoom CLI can be used without an AI agent. Each integration is packaged as a small core Skill plus focused reference modules. The agent loads the relevant setup, execution, billing, TemplateSpec, Market, local-Skill, or CLI guidance for the current intent.
+The loomloom CLI can be used without an AI agent. Each integration is packaged as a small core Skill plus focused reference modules. The agent loads the relevant setup, execution, billing, TemplateSpec, Market, local-Skill, or CLI guidance for the current intent.
 
 Together, those modules help the agent:
 
@@ -30,8 +30,8 @@ They do not move hosted execution logic, credentials, or private SkillBot instru
 
 ## Install a workflow as a local Agent Skill
 
-LoomLoom can also generate a local Skill wrapper for a specific private template version or Market SkillBot. This is separate from installing the main LoomLoom integration package.
+loomloom can also generate a local Skill wrapper for a specific private template version or Market SkillBot. This is separate from installing the main loomloom integration package.
 
-The wrapper records how to collect inputs and invoke LoomLoom, but it does not execute the workflow during installation. Every later paid run still requires a current estimate and explicit confirmation.
+The wrapper records how to collect inputs and invoke loomloom, but it does not execute the workflow during installation. Every later paid run still requires a current estimate and explicit confirmation.
 
 See [SkillBots and Market](/documentation/loomloom/skillbots-and-market) for the supported flow.
