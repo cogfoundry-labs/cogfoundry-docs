@@ -1,8 +1,9 @@
 :root {
   --cogfoundry-border: #e5e5e5;
-  --cogfoundry-sidebar: #fafafa;
+  --cogfoundry-sidebar: #ffffff;
   --cogfoundry-text: #111111;
   --cogfoundry-muted: #525252;
+  --cogfoundry-accent: #09e4a7;
 }
 
 #navbar {
@@ -10,18 +11,18 @@
 }
 
 #navbar nav a[href="https://console.cogfoundry.ai/"] {
-  color: #ffffff !important;
-  background: #111111 !important;
+  color: var(--cogfoundry-text) !important;
+  background: var(--cogfoundry-accent) !important;
   border-radius: 10px;
 }
 
 #navbar nav a[href="https://console.cogfoundry.ai/"] span,
 #navbar nav a[href="https://console.cogfoundry.ai/"] svg {
-  color: #ffffff !important;
+  color: var(--cogfoundry-text) !important;
 }
 
 #navbar nav a[href="https://console.cogfoundry.ai/"] > span:first-child {
-  background: #111111 !important;
+  background: var(--cogfoundry-accent) !important;
 }
 
 #assistant-entry,
@@ -74,25 +75,4 @@ card,
 callout,
 code-block {
   border-radius: 12px;
-}
-
-.dark {
-  --cogfoundry-border: #2a2a2a;
-  --cogfoundry-sidebar: #0a0a0a;
-  --cogfoundry-text: #ffffff;
-  --cogfoundry-muted: #a3a3a3;
-}
-
-.dark #navbar nav a[href="https://console.cogfoundry.ai/"] {
-  color: #111111 !important;
-  background: #ffffff !important;
-}
-
-.dark #navbar nav a[href="https://console.cogfoundry.ai/"] span,
-.dark #navbar nav a[href="https://console.cogfoundry.ai/"] svg {
-  color: #111111 !important;
-}
-
-.dark #navbar nav a[href="https://console.cogfoundry.ai/"] > span:first-child {
-  background: #ffffff !important;
 }
