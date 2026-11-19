@@ -34,8 +34,36 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Docs",
         "icon": "book-open",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "documentation/model-center/quickstart",
+              "documentation/model-center/overview",
+              "documentation/model-center/models"
+            ]
+          },
+          {
+            "group": "API usage",
+            "pages": [
+              "documentation/model-center/model-routing",
+              "documentation/model-center/error-handling"
+            ]
+          },
+          {
+            "group": "Usage & limits",
+            "pages": [
+              "documentation/model-center/usage-billing",
+              "documentation/model-center/limits"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "LoomLoom",
+        "icon": "workflow",
         "groups": [
           {
             "group": "Overview",
@@ -156,6 +184,10 @@
   },
   "redirects": [
     {
+      "source": "/overview/quickstart",
+      "destination": "/documentation/model-center/quickstart"
+    },
+    {
       "source": "/overview/:slug*",
       "destination": "/documentation/overview/:slug*"
     },
@@ -165,11 +197,7 @@
     },
     {
       "source": "/model-center/:slug*",
-      "destination": "/documentation/loomloom/supported-models"
-    },
-    {
-      "source": "/documentation/model-center/:slug*",
-      "destination": "/documentation/loomloom/supported-models"
+      "destination": "/documentation/model-center/:slug*"
     },
     {
       "source": "/privacy/:slug*",
