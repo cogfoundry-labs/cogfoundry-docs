@@ -1,121 +1,328 @@
 ---
 title: Quickstart
-description: Send your first request to CogFoundry with one API key.
+description: Connect an AI tool or send your first API request to access leading text, image, video, and audio models with a single key.
 icon: rocket
 ---
 
-CogFoundry gives you one API key for every frontier model, behind OpenAI, Anthropic, and Google compatible endpoints. This page takes you from zero to your first response.
+CogFoundry is a production-grade AI execution platform offering built-in queue and rate-limit scheduling to turn AI capabilities into repeatable, predictable outcomes.
+
+## Start with Model Access
+
+<Columns cols={2}>
+  <Card title="Use your preferred tool" icon="terminal" href="#use-an-ai-tool">
+    Connect Codex Desktop or Claude Code.
+  </Card>
+  <Card title="Build with the API" icon="code" href="#call-the-api">
+    Send a request with Python, Node.js, or cURL.
+  </Card>
+</Columns>
+
+## Prepare your account and key
 
 <Steps>
+  <Step title="Create an account">
+    [Sign up for CogFoundry](https://console.cogfoundry.ai/signup?redirect=%2Fapi-keys) and complete email verification. Already have an account? [Sign in](https://console.cogfoundry.ai/login?redirect=%2Fapi-keys).
+  </Step>
   <Step title="Create an API key">
-    Open [API keys](https://console.cogfoundry.ai/api-keys) in the console and create a key. The full value is shown once, so copy it immediately and store it as an environment variable:
+    Open [API Keys](https://console.cogfoundry.ai/api-keys), click **New Key**, give the key a name, and create it. Copy the full key when it appears; it is shown only once.
+  </Step>
+  <Step title="Check your balance">
+    Open [Credits](https://console.cogfoundry.ai/credits) and confirm you have an available balance. If needed, click **Add Credits** and complete the purchase before making a model request.
+  </Step>
+</Steps>
+
+<Note>
+  Keep your key private. Do not put it in public repositories, screenshots, or website code served to users. Model requests are billed to your CogFoundry account.
+</Note>
+
+## Use an AI tool
+
+Choose your tool and follow its setup guide. [Prepare a key and balance](#prepare-your-account-and-key) first.
+
+<Columns cols={2}>
+  <Card title="Codex Desktop" icon="terminal" href="/documentation/model-center/codex-desktop">
+    Web to Agent, CC Switch, or manual configuration.
+  </Card>
+  <Card title="Claude Code" icon="terminal" href="/documentation/model-center/claude-code">
+    Configure the Anthropic-compatible connection.
+  </Card>
+</Columns>
+
+1. Install the tool using the official link in its guide.
+2. Configure your CogFoundry key, the tool-specific base URL, and a supported model.
+3. Reopen the tool and send a short message. A model reply confirms the connection.
+
+Use the URL and settings in the matching guide. Codex and Claude Code use different API formats.
+
+## Call the API
+
+This example uses the OpenAI-compatible Chat Completions API and `openai/gpt-4o-mini`. [Prepare a key and balance](#prepare-your-account-and-key) first.
+
+| Field | Value |
+| --- | --- |
+| **SDK base URL** | `https://router.cogfoundry.ai/api/v1` |
+| **Request** | `POST /chat/completions` |
+| **Authentication** | `Authorization: Bearer YOUR_COGFOUNDRY_API_KEY` |
+
+### Save your key for this terminal session
+
+Replace `YOUR_COGFOUNDRY_API_KEY` with your key and run the command below. Keep this window open for the next step.
+
+<Tabs>
+  <Tab title="macOS">
+    Open Terminal.
 
     ```bash
-    export MODEL_CENTER_API_KEY="<your-api-key>"
+    export COGFOUNDRY_API_KEY="YOUR_COGFOUNDRY_API_KEY"
     ```
+  </Tab>
+  <Tab title="Windows">
+    Open **PowerShell**. In Windows Terminal, choose the PowerShell profile.
 
-    Never commit the key to source control or paste it into screenshots and issue reports.
-  </Step>
-
-  <Step title="Point your client at the base URL">
-    All requests go to the same host:
-
-    ```text
-    https://router.cogfoundry.ai/api/v1
+    ```powershell
+    $env:COGFOUNDRY_API_KEY = "YOUR_COGFOUNDRY_API_KEY"
     ```
-
-    If you already use the OpenAI SDK, change `base_url` to this value and keep the rest of your code as it is.
-  </Step>
-
-  <Step title="Pick a model">
-    Models are addressed by slug in the form `provider/model`, for example `anthropic/claude-sonnet-5.5`. Browse the full list, context windows, and per-token pricing on the [model list](https://cogfoundry.ai/en/models/).
-
-    The current slug list is also available from the API: `GET /api/v1/models`. It answers without a key, so it tells you which slugs exist but not whether your key works.
-  </Step>
-
-  <Step title="Send the first request">
-    With cURL:
+  </Tab>
+  <Tab title="Linux">
+    Open your terminal.
 
     ```bash
-    curl https://router.cogfoundry.ai/api/v1/chat/completions \
-      -H "Authorization: Bearer $MODEL_CENTER_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "model": "anthropic/claude-sonnet-5.5",
-        "messages": [
-          { "role": "user", "content": "Say hello in one short sentence." }
-        ]
-      }'
+    export COGFOUNDRY_API_KEY="YOUR_COGFOUNDRY_API_KEY"
     ```
+  </Tab>
+</Tabs>
 
-    A successful call returns the usual chat completion body. The reply text is at `choices[0].message.content`:
+### Send your first request
 
-    ```json
-    {
-      "id": "msg_...",
-      "model": "claude-sonnet-5-5",
-      "choices": [
-        {
-          "index": 0,
-          "message": { "role": "assistant", "content": "Hello, it's nice to meet you!" },
-          "finish_reason": "stop"
-        }
-      ],
-      "usage": { "prompt_tokens": 19, "completion_tokens": 14, "total_tokens": 33 }
-    }
-    ```
+Choose one option below. Run its install and example commands in the same window where you set your key.
 
-    The provider echoes the slug with dots normalised to dashes (`claude-sonnet-5.5` comes back as `claude-sonnet-5-5`). Match on your own request value, not on the response field.
+<Tabs>
+  <Tab title="Python">
+    Requires [Python 3.9 or later](https://www.python.org/downloads/). Install the OpenAI SDK:
 
-    With the Python OpenAI SDK, install the package first:
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        python3 -m pip install openai
+        ```
+      </Tab>
+      <Tab title="Windows">
+        ```powershell
+        py -m pip install openai
+        ```
 
-    ```bash
-    pip install openai
-    ```
+        If `py` is unavailable but `python --version` works, use `python` instead of `py` in both commands.
+      </Tab>
+      <Tab title="Linux">
+        ```bash
+        python3 -m pip install openai
+        ```
+      </Tab>
+    </Tabs>
+
+    Save this code as `quickstart.py` in your current folder:
 
     ```python
     import os
     from openai import OpenAI
 
     client = OpenAI(
+        api_key=os.environ["COGFOUNDRY_API_KEY"],
         base_url="https://router.cogfoundry.ai/api/v1",
-        api_key=os.environ["MODEL_CENTER_API_KEY"],
         timeout=120.0,
     )
 
     response = client.chat.completions.create(
-        model="anthropic/claude-sonnet-5.5",
+        model="openai/gpt-4o-mini",
         messages=[{"role": "user", "content": "Say hello in one short sentence."}],
     )
     print(response.choices[0].message.content)
     ```
 
-    <Note>
-      Keep the explicit `timeout`. The SDK defaults are short, and on a network with a slow TLS handshake the first request can fail with `openai.APITimeoutError` even though the request itself is fine — raise the timeout and retry before suspecting the key.
-    </Note>
+    Run it:
 
-    If the key is wrong or missing, the request fails with an `invalid_api_key` error rather than an empty response. An unknown model returns `400 invalid_request`. See [Errors](/documentation/model-center/error-handling) for the full set.
-  </Step>
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        python3 quickstart.py
+        ```
+      </Tab>
+      <Tab title="Windows">
+        ```powershell
+        py quickstart.py
+        ```
+      </Tab>
+      <Tab title="Linux">
+        ```bash
+        python3 quickstart.py
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
 
-  <Step title="Use it from your coding agent">
-    Any agent that accepts a custom OpenAI-compatible base URL can use CogFoundry. Point it at `https://router.cogfoundry.ai/api/v1`, give it the key through an environment variable, and use model slugs for model selection. Clients that speak the Anthropic or Google protocol need a different header and path — see [Model routing](/documentation/model-center/model-routing).
-  </Step>
-</Steps>
+  <Tab title="Node.js">
+    Requires [Node.js 22 or later](https://nodejs.org/en/download). Install the OpenAI SDK in your project folder:
 
-<Note>
-  Image and video models are asynchronous and live on the same host. Submit to `POST /tasks/generations`, read `data.request_id` from the response, then poll `GET /tasks/generations/{request_id}`. Submission returns `200` as soon as the job is queued, so a `200` there does not mean the job will succeed: read `data.status` while polling, and when it turns `FAILED` the reason is in `data.fail_reason`.
-</Note>
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        npm install openai
+        ```
+      </Tab>
+      <Tab title="Windows">
+        ```powershell
+        npm.cmd install openai
+        ```
+      </Tab>
+      <Tab title="Linux">
+        ```bash
+        npm install openai
+        ```
+      </Tab>
+    </Tabs>
+
+    Save this code as `quickstart.mjs` in the same folder:
+
+    ```javascript
+    import OpenAI from "openai";
+
+    const client = new OpenAI({
+      apiKey: process.env.COGFOUNDRY_API_KEY,
+      baseURL: "https://router.cogfoundry.ai/api/v1",
+      timeout: 120_000,
+    });
+
+    const response = await client.chat.completions.create({
+      model: "openai/gpt-4o-mini",
+      messages: [{ role: "user", content: "Say hello in one short sentence." }],
+    });
+    console.log(response.choices[0].message.content);
+    ```
+
+    Run it:
+
+    ```bash
+    node quickstart.mjs
+    ```
+  </Tab>
+
+  <Tab title="HTTP">
+    <Tabs>
+      <Tab title="macOS">
+        Run this request in Terminal:
+
+        ```bash
+        curl https://router.cogfoundry.ai/api/v1/chat/completions \
+          -H "Authorization: Bearer $COGFOUNDRY_API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "openai/gpt-4o-mini",
+            "messages": [
+              { "role": "user", "content": "Say hello in one short sentence." }
+            ]
+          }'
+        ```
+      </Tab>
+      <Tab title="Windows">
+        Run this request in PowerShell:
+
+        ```powershell
+        $CogRequest = @{
+          model = 'openai/gpt-4o-mini'
+          messages = @(
+            @{ role = 'user'; content = 'Say hello in one short sentence.' }
+          )
+        } | ConvertTo-Json -Depth 4
+
+        $CogReply = Invoke-RestMethod -Method Post `
+          -Uri 'https://router.cogfoundry.ai/api/v1/chat/completions' `
+          -Headers @{ Authorization = "Bearer $env:COGFOUNDRY_API_KEY" } `
+          -ContentType 'application/json' -Body $CogRequest -TimeoutSec 120
+
+        $CogReply.choices[0].message.content
+        ```
+      </Tab>
+      <Tab title="Linux">
+        Run this request in Terminal:
+
+        ```bash
+        curl https://router.cogfoundry.ai/api/v1/chat/completions \
+          -H "Authorization: Bearer $COGFOUNDRY_API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "openai/gpt-4o-mini",
+            "messages": [
+              { "role": "user", "content": "Say hello in one short sentence." }
+            ]
+          }'
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+**You are connected when a model reply appears.** The SDK examples print the reply. In the cURL response, look for `choices[0].message.content`.
+
+<Accordion title="Choose a different model">
+  Browse [Models & pricing](https://cogfoundry.ai/en/models/) and copy the exact model ID. For this example, choose a model that supports Chat Completions, then replace only the `model` value.
+
+  You can also list models with:
+
+  <Tabs>
+    <Tab title="macOS">
+      ```bash
+      curl https://router.cogfoundry.ai/api/v1/models
+      ```
+    </Tab>
+    <Tab title="Windows">
+      ```powershell
+      curl.exe https://router.cogfoundry.ai/api/v1/models
+      ```
+    </Tab>
+    <Tab title="Linux">
+      ```bash
+      curl https://router.cogfoundry.ai/api/v1/models
+      ```
+    </Tab>
+  </Tabs>
+
+  The model list is public. A successful response from this endpoint does not verify your API key or balance.
+</Accordion>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="My first request failed. What should I check?">
+    | Error | What to check |
+    | --- | --- |
+    | 401 / invalid key | Copy the CogFoundry key again, remove extra spaces, and check that it is active and has not expired. |
+    | 400 / invalid request | Check the exact model ID, its supported API format, and the request body. |
+    | 404 | Check the full request URL. Read the error message for any model or upstream routing issue. |
+    | Insufficient credits or quota | Check your available Credits and any quota assigned to the key. |
+    | 429 | Read the error message. Check rate or concurrency limits, then reduce concurrent requests and wait before retrying. |
+    | 5xx | Retry after a short wait. If the error persists, contact support with the model ID, time, and request ID if present. Remove your key from any logs you share. |
+  </Accordion>
+
+  <Accordion title="The model list works. Why does my request fail?">
+    The model list does not require authentication. A model request still needs a valid key, sufficient balance, permission to use the model, and the correct API format. Check the error returned by the model request.
+  </Accordion>
+
+  <Accordion title="How much does the first request cost?">
+    Model usage is pay-as-you-go. Rates vary by model and usage; check [Models & pricing](https://cogfoundry.ai/en/models/) before calling. Review your balance and transactions in [Credits](https://console.cogfoundry.ai/credits). API access does not require a separate monthly subscription. CogFoundry currently charges 0% platform fees for a limited time; model usage is still billed. Promotional terms are subject to change.
+  </Accordion>
+
+  <Accordion title="Can I use an existing OpenAI SDK project?">
+    If your project uses Chat Completions, change the key, base URL, and model ID. For other endpoints, check the model’s supported API formats and parameters.
+  </Accordion>
+</AccordionGroup>
 
 ## Next steps
 
-<Columns cols={3}>
-  <Card title="Models & pricing" icon="table" href="/documentation/model-center/models">
-    Browse models, slugs, and per-token pricing.
+<Columns cols={2}>
+  <Card title="Models & pricing" icon="table" href="https://cogfoundry.ai/en/models/">
+    Compare capabilities, supported formats, and usage rates.
   </Card>
-  <Card title="Model routing" icon="git-branch" href="/documentation/model-center/model-routing">
-    How slugs, providers, and compatible request formats fit together.
-  </Card>
-  <Card title="Credits & usage" icon="credit-card" href="/documentation/model-center/usage-billing">
-    Where your balance and usage records live.
+  <Card title="Manage API keys" icon="key" href="https://console.cogfoundry.ai/api-keys">
+    Review model access, limits, and key status.
   </Card>
 </Columns>
