@@ -41,22 +41,8 @@
             "group": "Getting started",
             "pages": [
               "documentation/model-center/quickstart",
-              "documentation/model-center/overview",
-              "documentation/model-center/models"
-            ]
-          },
-          {
-            "group": "API usage",
-            "pages": [
-              "documentation/model-center/model-routing",
-              "documentation/model-center/error-handling"
-            ]
-          },
-          {
-            "group": "Usage & limits",
-            "pages": [
-              "documentation/model-center/usage-billing",
-              "documentation/model-center/limits"
+              "documentation/model-center/codex-desktop",
+              "documentation/model-center/claude-code"
             ]
           }
         ]

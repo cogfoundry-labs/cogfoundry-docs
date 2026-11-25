@@ -1,0 +1,299 @@
+---
+title: Claude Code
+description: Connect Claude Code to CogFoundry using Web to Agent, CC Switch or a settings file.
+icon: terminal
+---
+
+import { ClaudeCodeSetup } from "/snippets/claude-code-setup.jsx";
+
+<Columns cols={3}>
+  <Card title="Web to Agent" icon="zap" href="#a-web-to-agent">
+    Check your key and write local settings.
+  </Card>
+  <Card title="CC Switch" icon="sliders-horizontal" href="#b-cc-switch">
+    Manage providers and switch between them.
+  </Card>
+  <Card title="Settings file" icon="file-code" href="#c-manual-configuration">
+    Configure Claude Code yourself.
+  </Card>
+</Columns>
+
+<Note>
+  Before you start: [install Claude Code](https://code.claude.com/docs/en/setup#install-claude-code) and copy your API key from the [CogFoundry console](https://console.cogfoundry.ai/api-keys).
+</Note>
+
+## Install Claude Code
+
+Open PowerShell on Windows, or a terminal on macOS/Linux, and run the command for your system. See the [official installation guide](https://code.claude.com/docs/en/setup#install-claude-code) for requirements and other installation options.
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+  </Tab>
+  <Tab title="Windows">
+    ```powershell
+    irm https://claude.ai/install.ps1 | iex
+    ```
+
+    On native Windows, install [Git for Windows](https://git-scm.com/downloads/win) if Git Bash is missing.
+  </Tab>
+  <Tab title="Linux">
+    ```bash
+    curl -fsSL https://claude.ai/install.sh | bash
+    ```
+
+    For WSL, run these commands inside your Linux environment.
+  </Tab>
+</Tabs>
+
+Open a new terminal and confirm the installation:
+
+```bash
+claude --version
+```
+
+## A. Web to Agent
+
+Check the connection, then select your local `.claude` folder. The tool backs up `settings.json` and preserves unrelated settings.
+
+<ClaudeCodeSetup />
+
+1. Enter your CogFoundry key and choose a model. Click **Check connection**; this sends a small billable request.
+2. Click **Write to .claude folder** and grant access. Create the folder if it is missing.
+
+   <Tabs>
+     <Tab title="macOS">
+       Select `~/.claude`. Press Command + Shift + G in the folder picker to enter the path.
+     </Tab>
+     <Tab title="Windows">
+       Select `C:\Users\YOUR_NAME\.claude`.
+     </Tab>
+     <Tab title="Linux">
+       Select `~/.claude` in your home folder.
+     </Tab>
+   </Tabs>
+
+3. Exit Claude Code. Open a new terminal in your project and run `claude`.
+
+Keep the backup private. To switch back, restore the matching `settings.json.cogfoundry.*.bak` file or use your previous provider in CC Switch.
+
+## B. CC Switch
+
+Create a separate CogFoundry provider entry.
+
+1. Install CC Switch from its [official releases](https://github.com/farion1231/cc-switch/releases).
+2. Select **Claude Code**, click **Add provider** and choose **Custom Configuration**. Enter **CogFoundry** as the name.
+3. Fill in the connection and model fields below. Use **Fetch Models** or enter the models manually.
+4. Check the generated `settings.json`: `ANTHROPIC_API_KEY` should be an empty string. If a Fable mapping is available, set it to `anthropic/claude-fable-5.1`.
+5. Save the provider and switch to it in **Direct** mode. If your version shows **Write common configuration**, enable it. Exit Claude Code and start a new session.
+
+| Field | Value |
+| --- | --- |
+| API format | Anthropic Messages (Native) |
+| Auth Field | ANTHROPIC_AUTH_TOKEN |
+| API Key | Your CogFoundry key |
+| API Endpoint | `https://router.cogfoundry.ai/api` |
+| Default model / Sonnet | `anthropic/claude-sonnet-5.5` |
+| Default Haiku Model | `anthropic/claude-haiku-5.5` |
+| Default Opus Model | `anthropic/claude-opus-5.5` |
+
+Use the base URL above. Claude Code adds `/v1/messages` when it sends a request.
+
+## C. Manual configuration
+
+### 1. Back up your settings
+
+Exit Claude Code. Open your home folder's `.claude` directory:
+
+<Tabs>
+  <Tab title="macOS">
+    in Finder, press Command + Shift + G and enter `~/.claude`.
+  </Tab>
+  <Tab title="Windows">
+    in File Explorer, enter `%USERPROFILE%\.claude`.
+  </Tab>
+  <Tab title="Linux">
+    open `.claude` in your home folder; press Ctrl + H to show hidden folders.
+  </Tab>
+</Tabs>
+
+Copy any existing `settings.json` to a separate backup folder. Create `.claude` if it is missing.
+
+### 2. Save your CogFoundry settings
+
+Replace `YOUR_COGFOUNDRY_API_KEY` with your CogFoundry key, then run the block for your system. **If settings.json already has settings, expand the instructions below before editing.**
+
+<Accordion title="Already have a settings.json? Keep your other settings">
+  Do not run a block that replaces the file. Open `settings.json` in a plain-text editor and merge the `env` values from the example below into its existing `env` object. Keep other settings, such as permissions, hooks and MCP configuration. Each key should appear once.
+
+  Remove old `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX` and `CLAUDE_CODE_USE_FOUNDRY` values from that `env` object. If it contains `CLAUDE_CODE_SUBAGENT_MODEL`, set it to `anthropic/claude-sonnet-5.5`. Web to Agent can merge these settings for you.
+</Accordion>
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    mkdir -p "$HOME/.claude"
+    umask 077
+    cat > "$HOME/.claude/settings.json" <<'EOF'
+    {
+      "env": {
+        "ANTHROPIC_BASE_URL": "https://router.cogfoundry.ai/api",
+        "ANTHROPIC_AUTH_TOKEN": "YOUR_COGFOUNDRY_API_KEY",
+        "ANTHROPIC_API_KEY": "",
+        "ANTHROPIC_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic/claude-haiku-5.5",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-opus-5.5",
+        "ANTHROPIC_DEFAULT_FABLE_MODEL": "anthropic/claude-fable-5.1"
+      }
+    }
+    EOF
+    chmod 600 "$HOME/.claude/settings.json"
+    ```
+  </Tab>
+  <Tab title="Windows">
+    ```powershell
+    $CogClaudeDir = Join-Path $env:USERPROFILE '.claude'
+    New-Item -ItemType Directory -Force -Path $CogClaudeDir | Out-Null
+    @'
+    {
+      "env": {
+        "ANTHROPIC_BASE_URL": "https://router.cogfoundry.ai/api",
+        "ANTHROPIC_AUTH_TOKEN": "YOUR_COGFOUNDRY_API_KEY",
+        "ANTHROPIC_API_KEY": "",
+        "ANTHROPIC_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic/claude-haiku-5.5",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-opus-5.5",
+        "ANTHROPIC_DEFAULT_FABLE_MODEL": "anthropic/claude-fable-5.1"
+      }
+    }
+    '@ | Set-Content -LiteralPath (Join-Path $CogClaudeDir 'settings.json') -Encoding ASCII
+    ```
+  </Tab>
+  <Tab title="Linux">
+    ```bash
+    mkdir -p "$HOME/.claude"
+    umask 077
+    cat > "$HOME/.claude/settings.json" <<'EOF'
+    {
+      "env": {
+        "ANTHROPIC_BASE_URL": "https://router.cogfoundry.ai/api",
+        "ANTHROPIC_AUTH_TOKEN": "YOUR_COGFOUNDRY_API_KEY",
+        "ANTHROPIC_API_KEY": "",
+        "ANTHROPIC_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic/claude-sonnet-5.5",
+        "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic/claude-haiku-5.5",
+        "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-opus-5.5",
+        "ANTHROPIC_DEFAULT_FABLE_MODEL": "anthropic/claude-fable-5.1"
+      }
+    }
+    EOF
+    chmod 600 "$HOME/.claude/settings.json"
+    ```
+  </Tab>
+</Tabs>
+
+<Accordion title="Model mappings and file format">
+  `ANTHROPIC_MODEL` selects the starting model. The other variables map Claude Code's model families. This configuration maps the Fable option to Fable 5.1. Use `/model` in Claude Code to choose a different family.
+
+  Save `settings.json` as plain text with straight quotes and valid JSON. On Windows, make sure it is not named `settings.json.txt`. Keep the file and its backups private.
+
+  Do not switch providers in CC Switch while editing; it can rewrite this file. If you use a custom `CLAUDE_CONFIG_DIR`, edit that directory instead.
+</Accordion>
+
+### 3. Start Claude Code
+
+Open a new terminal in your project folder and run:
+
+```bash
+claude
+```
+
+Review the project trust prompt, then follow the verification steps below.
+
+<Accordion title="Try temporary environment variables instead">
+  These settings apply to the current terminal. Replace the key placeholder before running. Use a fresh terminal without old provider variables.
+
+  <Tabs>
+    <Tab title="macOS">
+      ```bash
+      export ANTHROPIC_BASE_URL="https://router.cogfoundry.ai/api"
+      export ANTHROPIC_AUTH_TOKEN="YOUR_COGFOUNDRY_API_KEY"
+      export ANTHROPIC_API_KEY=""
+      export ANTHROPIC_MODEL="anthropic/claude-sonnet-5.5"
+      claude
+      ```
+    </Tab>
+    <Tab title="Windows">
+      ```powershell
+      $env:ANTHROPIC_BASE_URL = "https://router.cogfoundry.ai/api"
+      $env:ANTHROPIC_AUTH_TOKEN = "YOUR_COGFOUNDRY_API_KEY"
+      $env:ANTHROPIC_API_KEY = ""
+      $env:ANTHROPIC_MODEL = "anthropic/claude-sonnet-5.5"
+      claude
+      ```
+    </Tab>
+    <Tab title="Linux">
+      ```bash
+      export ANTHROPIC_BASE_URL="https://router.cogfoundry.ai/api"
+      export ANTHROPIC_AUTH_TOKEN="YOUR_COGFOUNDRY_API_KEY"
+      export ANTHROPIC_API_KEY=""
+      export ANTHROPIC_MODEL="anthropic/claude-sonnet-5.5"
+      claude
+      ```
+    </Tab>
+  </Tabs>
+
+  Use the persistent settings above to configure every model family.
+</Accordion>
+
+## Verify your setup
+
+1. Run `/status` inside Claude Code. Check that the base URL is `https://router.cogfoundry.ai/api` and the auth token uses `ANTHROPIC_AUTH_TOKEN`.
+2. Send the prompt below. You should receive `COG_CLAUDE_OK`.
+
+```text
+Reply with exactly COG_CLAUDE_OK.
+```
+
+<Accordion title="Also verify a file tool">
+  In an empty test project, send:
+
+  ```text
+  Create a file named cog-claude-proof.txt in this project containing COG_CLAUDE_TOOL_OK.
+  Use the Read tool to read it back, then confirm what it contains.
+  ```
+
+  Approve the file operation if asked. Open the file yourself and check its contents.
+</Accordion>
+
+| Symptom | What to check |
+| --- | --- |
+| 401 / authentication error | Use your CogFoundry key as ANTHROPIC_AUTH_TOKEN. Keep ANTHROPIC_API_KEY empty. |
+| 404 | Use the base URL ending in /api. Do not append /v1 or /messages to the configured URL. |
+| Invalid model identifier | Check the exact model ID. Start with anthropic/claude-sonnet-5.5. |
+| Old provider is still active | Exit Claude Code, check /status after restarting, and review the configuration sources below. |
+| No folder picker | Use desktop Chrome or Edge on HTTPS/localhost, or download settings.json. |
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why is Claude Code using my old provider?">
+    Check `/status`. Review your shell profile, project `.claude/settings.local.json` and any `--settings` file for old credentials, provider flags or model overrides. Company-managed settings can also restrict the connection; contact your administrator if they do.
+
+    If Claude Code reports a conflict with a saved Claude login, run `/logout`, exit Claude Code and restart with your CogFoundry settings. This signs you out of that Claude login.
+  </Accordion>
+
+  <Accordion title="Does this also configure the VS Code extension?">
+    This page covers the Claude Code terminal. The VS Code extension has its own environment setting and login check. Follow the [official extension instructions](https://code.claude.com/docs/en/llm-gateway-connect#vs-code-extension) to configure that surface.
+  </Accordion>
+
+  <Accordion title="How do I return to my previous provider?">
+    Exit Claude Code and restore your original `settings.json` from its matching backup. If the file did not exist before setup, move the new CogFoundry settings file out of `.claude`. Alternatively, switch to your previous provider in CC Switch. Open a fresh terminal so temporary environment variables do not carry over.
+
+    This tool updates settings.json and its backup. It does not delete conversation files.
+  </Accordion>
+</AccordionGroup>

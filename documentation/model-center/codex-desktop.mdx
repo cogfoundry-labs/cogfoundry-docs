@@ -1,0 +1,279 @@
+---
+title: Codex Desktop
+description: Connect Codex to CogFoundry. Choose a browser setup, manage providers with CC Switch, or configure the files yourself.
+icon: terminal
+---
+
+import { CodexDesktopSetup } from "/snippets/codex-desktop-setup.jsx";
+
+<Note>
+  **Before you start**
+
+  Install Codex, then get a key from [CogFoundry API Keys](https://console.cogfoundry.ai/api-keys).
+
+  [Download Codex](https://chatgpt.com/download/) · [Official installation guide](https://learn.chatgpt.com/docs/app)
+</Note>
+
+<Columns cols={3}>
+  <Card title="Web to Agent" icon="zap" href="#a-web-to-agent">
+    Check your key and write local configuration.
+  </Card>
+  <Card title="CC Switch" icon="sliders-horizontal" href="#b-cc-switch">
+    Keep each provider and API key separate.
+  </Card>
+  <Card title="Configuration files" icon="file-code" href="#c-manual-configuration">
+    Set the API key, model and Responses route.
+  </Card>
+</Columns>
+
+## A. Web to Agent
+
+Check the connection, then select your local `.codex` folder. Existing files are backed up before the active provider changes to CogFoundry.
+
+<CodexDesktopSetup />
+
+1. Enter your CogFoundry key and choose a model. Click **Check connection**; this sends a small billable request.
+2. Click **Write to .codex folder** and grant access to that folder.
+
+   <Tabs>
+     <Tab title="macOS">
+       Select `~/.codex`. Press Command + Shift + G in the folder picker to enter the path.
+     </Tab>
+     <Tab title="Windows">
+       Select `C:\Users\YOUR_NAME\.codex`.
+     </Tab>
+     <Tab title="Linux">
+       Select `~/.codex` in your home folder.
+     </Tab>
+   </Tabs>
+
+3. Save your work, fully quit Codex, reopen it and start a new conversation.
+
+The writer preserves unrelated config sections and backs up the original credentials. To switch back, use CC Switch or restore both original files from the matching `.cogfoundry.*.bak` pair.
+
+## B. CC Switch
+
+Use a separate CogFoundry provider entry so its key stays separate from your other providers.
+
+1. Install CC Switch from its [official releases](https://github.com/farion1231/cc-switch/releases).
+2. Select **Codex → Add Provider → Custom Configuration**. Set **Name** to **CogFoundry** and **Website URL** to `https://cogfoundry.ai`. If an older version shows an API format, choose **OpenAI compatible**.
+3. Paste your CogFoundry key into **API Key**. Set **API Request URL** to `https://router.cogfoundry.ai/api/v1`. Set **Default Model** to `openai/gpt-5.6-terra`. Use **Fetch Models** or **Add manually** to add that model and `openai/gpt-5.6-sol`.
+4. Check **auth.json** contains your Cog key. In **config.toml**, keep the generated provider ID consistent (often `custom`), set `requires_openai_auth = true` and `wire_api = "responses"`, and remove obsolete `disable_response_storage`. Remove conflicting auth fields such as an old `experimental_bearer_token` or `env_key` from this Cog provider. Keep other global settings.
+5. If you use **Approve for me**, choose an available Cog model under **Auto Review model** after adding the model list. The app warns that the default `codex-auto-review` may return 404 on relays.
+6. Click **Add**, then **Switch** on the CogFoundry card in **Direct** mode. If an older version shows **Write common configuration**, enable it. Check the generated files, fully quit and reopen Codex.
+
+## C. Manual configuration
+
+### 1. Open the folder and back up your files
+
+Copy your key from [CogFoundry API Keys](https://console.cogfoundry.ai/api-keys), save your work and fully quit Codex.
+
+Open your configuration folder:
+
+<Tabs>
+  <Tab title="macOS">
+    in Finder, press Command + Shift + G and enter `~/.codex`.
+  </Tab>
+  <Tab title="Windows">
+    in File Explorer, enter `%USERPROFILE%\.codex`.
+  </Tab>
+  <Tab title="Linux">
+    open `.codex` in your home folder; press Ctrl + H to show hidden folders.
+  </Tab>
+</Tabs>
+
+Create the folder if it is missing. Before editing, copy any existing `auth.json` and `config.toml` into a separate backup folder. Keep the two originals together.
+
+<Accordion title="Back up with Terminal or PowerShell instead">
+  <Tabs>
+    <Tab title="macOS">
+      Open Terminal and run:
+
+      ```bash
+      mkdir -p "$HOME/.codex"
+      COG_BACKUP_DIR=$(mktemp -d "$HOME/.codex/cog-backup.XXXXXX")
+      for COG_FILE in auth.json config.toml; do
+        if [ -f "$HOME/.codex/$COG_FILE" ]; then
+          cp -p "$HOME/.codex/$COG_FILE" "$COG_BACKUP_DIR/$COG_FILE" || exit 1
+        fi
+      done
+      printf 'Keep this backup folder: %s\n' "$COG_BACKUP_DIR"
+      ```
+    </Tab>
+    <Tab title="Windows">
+      Open PowerShell and run:
+
+      ```powershell
+      $ErrorActionPreference = 'Stop'
+      $CogDir = Join-Path $env:USERPROFILE '.codex'
+      New-Item -ItemType Directory -Force -Path $CogDir | Out-Null
+      $CogBackupDir = Join-Path $CogDir ('cog-backup.' + [guid]::NewGuid().ToString('N'))
+      New-Item -ItemType Directory -Path $CogBackupDir | Out-Null
+      foreach ($CogFile in @('auth.json', 'config.toml')) {
+        $CogSource = Join-Path $CogDir $CogFile
+        if (Test-Path -LiteralPath $CogSource -PathType Leaf) {
+          Copy-Item -LiteralPath $CogSource -Destination (Join-Path $CogBackupDir $CogFile)
+        }
+      }
+      Write-Host "Keep this backup folder: $CogBackupDir"
+      ```
+    </Tab>
+    <Tab title="Linux">
+      Open Terminal and run:
+
+      ```bash
+      mkdir -p "$HOME/.codex"
+      COG_BACKUP_DIR=$(mktemp -d "$HOME/.codex/cog-backup.XXXXXX")
+      for COG_FILE in auth.json config.toml; do
+        if [ -f "$HOME/.codex/$COG_FILE" ]; then
+          cp -p "$HOME/.codex/$COG_FILE" "$COG_BACKUP_DIR/$COG_FILE" || exit 1
+        fi
+      done
+      printf 'Keep this backup folder: %s\n' "$COG_BACKUP_DIR"
+      ```
+    </Tab>
+  </Tabs>
+
+  Keep the displayed backup path.
+</Accordion>
+
+### 2. Save your key in auth.json
+
+After completing the backup in Step 1, replace `YOUR_COGFOUNDRY_API_KEY` with your CogFoundry key. Copy and run the block for your system.
+
+<Tabs>
+  <Tab title="macOS">
+    ```bash
+    mkdir -p "$HOME/.codex"
+    umask 077
+    cat > "$HOME/.codex/auth.json" <<'EOF'
+    {
+      "OPENAI_API_KEY": "YOUR_COGFOUNDRY_API_KEY"
+    }
+    EOF
+    chmod 600 "$HOME/.codex/auth.json"
+    ```
+  </Tab>
+  <Tab title="Windows">
+    ```powershell
+    $CogDir = Join-Path $env:USERPROFILE '.codex'
+    New-Item -ItemType Directory -Force -Path $CogDir | Out-Null
+    @'
+    {
+      "OPENAI_API_KEY": "YOUR_COGFOUNDRY_API_KEY"
+    }
+    '@ | Set-Content -LiteralPath (Join-Path $CogDir 'auth.json') -Encoding ASCII
+    ```
+  </Tab>
+  <Tab title="Linux">
+    ```bash
+    mkdir -p "$HOME/.codex"
+    umask 077
+    cat > "$HOME/.codex/auth.json" <<'EOF'
+    {
+      "OPENAI_API_KEY": "YOUR_COGFOUNDRY_API_KEY"
+    }
+    EOF
+    chmod 600 "$HOME/.codex/auth.json"
+    ```
+  </Tab>
+</Tabs>
+
+### 3. Set the provider in config.toml
+
+For a new or empty `config.toml`, paste this configuration and save. **If the file already has settings, expand the instructions below before editing.**
+
+```toml
+model_provider = "cogfoundry"
+model = "openai/gpt-5.6-terra"
+model_reasoning_effort = "medium"
+cli_auth_credentials_store = "file"
+
+[model_providers.cogfoundry]
+name = "CogFoundry"
+base_url = "https://router.cogfoundry.ai/api/v1"
+requires_openai_auth = true
+wire_api = "responses"
+```
+
+<Accordion title="Already have a config.toml? Preserve your other settings">
+  Do not replace the whole file. Make these two edits:
+
+  1. Above the first line beginning with `[`, replace the existing `model_provider`, `model`, `model_reasoning_effort` and `cli_auth_credentials_store` assignments with the four assignments at the top of the example. Add any that are missing. Each setting must appear once at this top level. Remove the old top-level `disable_response_storage` assignment if present.
+  2. Find `[model_providers.cogfoundry]`. Replace that section, up to the next section header, with the provider section from the example. If it is absent, add the section at the end of the file. For this authentication method, remove any old `[model_providers.cogfoundry.auth]` subsection and its contents. Do not put `env_key` or `experimental_bearer_token` inside the CogFoundry section. Keep all other providers, project and MCP settings.
+
+  The URL must be plain text inside quotes, with no Markdown brackets or extra `/responses` suffix. Keep one assignment per line. `model_provider = "cogfoundry"` must match `[model_providers.cogfoundry]` exactly.
+</Accordion>
+
+<Accordion title="File names, text format and other setup notes">
+  Save both files directly inside `.codex` as UTF-8 plain text. Keep straight quotes and separate lines.
+
+  <Tabs>
+    <Tab title="macOS">
+      In TextEdit, choose **Format → Make Plain Text**.
+    </Tab>
+    <Tab title="Windows">
+      In Notepad, choose **Save as type → All files**. Enable file extensions in File Explorer and check that neither filename ends in `.txt`.
+    </Tab>
+    <Tab title="Linux">
+      Use a plain-text editor and keep the filenames `auth.json` and `config.toml`.
+    </Tab>
+  </Tabs>
+
+  Do not switch providers in CC Switch while editing: it can rewrite these files. If you deliberately set a different `CODEX_HOME`, use that folder instead. Keep credentials and their backups private.
+
+  To use GPT-5.6 Sol, change only `model` to `"openai/gpt-5.6-sol"`. Start with `medium` reasoning effort. Do not add `disable_response_storage` to this configuration.
+</Accordion>
+
+### 4. Reopen Codex and test
+
+Reopen Codex and start a new conversation. Send:
+
+```text
+Reply with exactly COG_CODEX_OK.
+```
+
+You should receive `COG_CODEX_OK`. If it fails, use the troubleshooting table below.
+
+<Accordion title="Also verify a file tool">
+  In an empty test project, send:
+
+  ```text
+  Create a file named cog-proof.txt in this project containing COG_TOOL_OK.
+  Use a file tool to read it back, then confirm what it contains.
+  ```
+
+  Approve the operation if asked. Open `cog-proof.txt` yourself and check it contains `COG_TOOL_OK`.
+
+  If automatic approval returns an error naming `codex-auto-review`, check Method B's Auto Review model setting.
+</Accordion>
+
+<Accordion title="Restore your previous provider">
+  Fully quit Codex. Copy the original `config.toml` and `auth.json` from Step 1's backup back into `.codex`. If a file did not exist before setup, move that newly created Cog file out of `.codex` instead. Restore both files from the same backup, so another provider's URL is never paired with your Cog key. Reopen Codex. Alternatively, switch to your original provider card in CC Switch.
+
+  Changing providers may affect how previous sessions are shown or resumed; see the FAQ. This configuration does not delete session files.
+</Accordion>
+
+## Verify your setup
+
+1. Start a new conversation and ask: `Reply with exactly COG_CODEX_OK.`
+2. In an empty test project, ask Codex to create `cog-proof.txt` containing `COG_TOOL_OK`. Open the file and check its contents.
+
+| Symptom | What to check |
+| --- | --- |
+| 401 | Use the CogFoundry key, and check requires_openai_auth and auth.json. |
+| 404 / upstream error | Check the exact model ID and base URL; retry the browser connection check. If it persists, share the error with CogFoundry support. |
+| Wrong provider after switching | Check whether CC Switch rewrote the files. Fully quit and reopen Codex. |
+| No folder picker | Open the standalone page in desktop Chrome/Edge. Use downloads if folder access is unavailable. |
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why are my previous conversations missing after switching to CogFoundry?" defaultOpen>
+    Switching to CogFoundry changes the active Codex provider. Depending on your Codex version and how it lists or resumes sessions, previous conversations may not appear in the same view or may not resume under the new provider. This is a possible provider-switching effect, not proof that your conversations were deleted.
+
+    This setup tool only writes `config.toml` and `auth.json` and their backups. It does not delete session files in `~/.codex/sessions/`.
+
+    To return to the original provider, restore both original files from the matching `.cogfoundry.*.bak` pair, or switch back to that provider in CC Switch using its own credentials. Fully quit and reopen Codex. If conversations remain missing, check the selected project, account and Codex home directory before contacting support.
+  </Accordion>
+</AccordionGroup>
