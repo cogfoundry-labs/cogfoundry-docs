@@ -1,0 +1,189 @@
+---
+title: OpenCode
+description: Use CogFoundry models in OpenCode's terminal interface. This guide uses OpenCode v2 and a custom provider.
+icon: terminal
+---
+
+<Steps titleSize="h2">
+  <Step title="Install OpenCode">
+    Get OpenCode from the [official installation guide](https://opencode.ai/docs/). Choose the instructions for your operating system.
+
+    <Tabs>
+      <Tab title="macOS">
+        Open Terminal and run:
+
+        ```bash
+        curl -fsSL https://opencode.ai/v2/install | bash
+        ```
+      </Tab>
+      <Tab title="Windows">
+        Download the Windows CLI binary for your processor from the [official installation guide](https://opencode.ai/docs/). Extract the download to a permanent folder. Add the folder containing `opencode.exe` to your user `Path`: search for **Edit environment variables for your account** in Start, select **Path → Edit → New**, enter the folder path, and save.
+
+        Open a new **PowerShell** window after saving.
+      </Tab>
+      <Tab title="Linux">
+        Open your terminal and run:
+
+        ```bash
+        curl -fsSL https://opencode.ai/v2/install | bash
+        ```
+      </Tab>
+    </Tabs>
+
+    Check the installation:
+
+    ```bash
+    opencode --version
+    ```
+
+    <Note>
+      Use version 2 or later with the configuration below.
+    </Note>
+  </Step>
+
+  <Step title="Set your CogFoundry key">
+    Copy your key from [API Keys](https://console.cogfoundry.ai/api-keys) and check your available balance in [Credits](https://console.cogfoundry.ai/credits).
+
+    Replace the placeholder and run the command in the same terminal you will use to start OpenCode.
+
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        export COGFOUNDRY_API_KEY="YOUR_COGFOUNDRY_API_KEY"
+        ```
+      </Tab>
+      <Tab title="Windows">
+        In PowerShell:
+
+        ```powershell
+        $env:COGFOUNDRY_API_KEY = "YOUR_COGFOUNDRY_API_KEY"
+        ```
+      </Tab>
+      <Tab title="Linux">
+        ```bash
+        export COGFOUNDRY_API_KEY="YOUR_COGFOUNDRY_API_KEY"
+        ```
+      </Tab>
+    </Tabs>
+
+    <Note>
+      This sets the key for the current terminal. Set it again when you open a new terminal.
+    </Note>
+  </Step>
+
+  <Step title="Add the CogFoundry provider">
+    Open your project folder in a text editor. Create `opencode.json` at the project root and paste this configuration:
+
+    ```json opencode.json
+    {
+      "$schema": "https://opencode.ai/config.json",
+      "model": "cogfoundry/gpt-4o-mini",
+      "providers": {
+        "cogfoundry": {
+          "name": "CogFoundry",
+          "env": ["COGFOUNDRY_API_KEY"],
+          "package": "@opencode/ai/providers/openai-compatible",
+          "settings": {
+            "baseURL": "https://router.cogfoundry.ai/api/v1"
+          },
+          "models": {
+            "gpt-4o-mini": {
+              "name": "GPT-4o mini",
+              "modelID": "openai/gpt-4o-mini"
+            }
+          }
+        }
+      }
+    }
+    ```
+
+    <Tip>
+      Already have `opencode.json` or `opencode.jsonc`? Back it up, then add `cogfoundry` to its existing `providers` object and update the top-level `model`. Keep your other settings and use one project configuration file.
+    </Tip>
+
+    | Setting | Value |
+    | --- | --- |
+    | API format | OpenAI-compatible Chat Completions |
+    | Base URL | `https://router.cogfoundry.ai/api/v1` |
+    | Model sent to CogFoundry | `openai/gpt-4o-mini` |
+    | Model selected in OpenCode | `cogfoundry/gpt-4o-mini` |
+
+    The OpenCode model name is a local alias. `modelID` supplies the exact CogFoundry model ID. The client adds `/chat/completions` to the base URL.
+  </Step>
+
+  <Step title="Start OpenCode">
+    In the terminal where you set your key, change to your project folder. Replace the example path with your own:
+
+    <Tabs>
+      <Tab title="macOS">
+        ```bash
+        cd "/path/to/your/project"
+        opencode --standalone
+        ```
+      </Tab>
+      <Tab title="Windows">
+        In PowerShell:
+
+        ```powershell
+        Set-Location 'C:\path\to\your\project'
+        opencode --standalone
+        ```
+      </Tab>
+      <Tab title="Linux">
+        ```bash
+        cd "/path/to/your/project"
+        opencode --standalone
+        ```
+      </Tab>
+    </Tabs>
+
+    `--standalone` starts a private server with the key from this terminal. In OpenCode, run `/models` and select **GPT-4o mini** under **CogFoundry**.
+
+    Send this prompt:
+
+    ```text
+    Reply with: Connected to CogFoundry.
+    ```
+
+    <Info>
+      A model reply confirms the connection. Requests use your CogFoundry credits.
+    </Info>
+  </Step>
+
+  <Step title="Try a file task">
+    In a test project, send:
+
+    ```text
+    Create cog-connection-test.txt containing exactly COGFOUNDRY_OK.
+    Read the file back and report its contents.
+    ```
+
+    Review any permission request. Check that the file exists in your project and contains `COGFOUNDRY_OK`.
+  </Step>
+</Steps>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I use another model?">
+    Copy its exact ID from [Models & pricing](https://cogfoundry.ai/en/models/). For this provider, choose a model that supports Chat Completions and tool calling.
+
+    Add a model entry under `providers.cogfoundry.models`, set its `modelID`, and select the matching `cogfoundry/<alias>` model. Do not copy an OpenRouter model alias or assume that every listed model supports coding tools.
+  </Accordion>
+
+  <Accordion title="Can I use this configuration for every project?">
+    Put the same configuration in `~/.config/opencode/opencode.json` instead of a project file. On Windows, use `%USERPROFILE%\.config\opencode\opencode.json`. Back up an existing file and merge the provider. Project settings can override global settings; managed settings can take precedence over both.
+  </Accordion>
+
+  <Accordion title="How do I switch back?">
+    Select your previous model with `/models`. To restore your previous defaults, restore the configuration backup or remove only the CogFoundry provider and its top-level model selection.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/documentation/model-center/quickstart" horizontal />
+  <Card title="Cline" icon="bot" href="/documentation/model-center/cline" horizontal />
+  <Card title="OpenCode provider configuration" icon="external-link" href="https://opencode.ai/docs/providers/" horizontal />
+</Columns>
