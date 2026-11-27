@@ -1,0 +1,114 @@
+---
+title: Cline
+description: Connect the Cline extension in Visual Studio Code to CogFoundry using your API key and an OpenAI-compatible endpoint.
+icon: bot
+---
+
+<Steps titleSize="h2">
+  <Step title="Install Cline">
+    <Tip>
+      Already installed? Skip to **Connect CogFoundry**.
+    </Tip>
+
+    Install [Visual Studio Code](https://code.visualstudio.com/download), then open **Extensions**:
+
+    <Tabs>
+      <Tab title="macOS">
+        Press **Command + Shift + X**.
+      </Tab>
+      <Tab title="Windows">
+        Press **Ctrl + Shift + X**.
+      </Tab>
+      <Tab title="Linux">
+        Press **Ctrl + Shift + X**.
+      </Tab>
+    </Tabs>
+
+    Search for **Cline** and install the [official Cline extension](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev). Open a project folder, then open Cline from the activity bar.
+
+    See the [official installation guide](https://docs.cline.bot/getting-started/installing-cline) for other supported editors.
+  </Step>
+
+  <Step title="Connect CogFoundry">
+    Copy your key from [API Keys](https://console.cogfoundry.ai/api-keys) and check your available balance in [Credits](https://console.cogfoundry.ai/credits).
+
+    Click the **Cline robot icon** in the left activity bar, then open **Settings** in the Cline panel header. In **API Configuration**, under **API Provider**, select **OpenAI Compatible** and enter:
+
+    | Field | Value |
+    | --- | --- |
+    | API Provider | OpenAI Compatible |
+    | Base URL | `https://router.cogfoundry.ai/api/v1` |
+    | API Key | Your CogFoundry API key |
+    | Model ID | `openai/gpt-4o-mini` |
+
+    Select the model from the list. If it is missing, choose **Use custom model ID…** and enter the ID above. If no list loads, enter the ID directly in **Model ID**.
+
+    <Note>
+      Use the base URL as shown; Cline adds `/chat/completions`. Choose the OpenAI Compatible provider for this setup rather than OpenAI or OpenRouter.
+    </Note>
+  </Step>
+
+  <Step title="Set the model limits">
+    Expand **Model Configuration** and set these values for the example model:
+
+    | Field | Value |
+    | --- | --- |
+    | Context Window Size | `128000` |
+    | Max Output Tokens | `16384` |
+
+    These are the CogFoundry catalog limits for GPT-4o mini. Keep image and other optional settings unchanged for the text-only test below.
+
+    <Tip>
+      If your Cline settings use separate models for **Plan** and **Act**, select the same CogFoundry provider and model in both modes for this first test.
+    </Tip>
+  </Step>
+
+  <Step title="Send a test message">
+    Click **Done** to return to chat, then send:
+
+    ```text
+    Reply with: Connected to CogFoundry. Do not use any tools.
+    ```
+
+    <Info>
+      A model reply confirms the connection. Requests use your CogFoundry credits.
+    </Info>
+  </Step>
+
+  <Step title="Try a file task">
+    Switch to **Act** mode. In a test project, send:
+
+    ```text
+    Create cog-connection-test.txt containing exactly COGFOUNDRY_OK.
+    Read the file back and report its contents.
+    ```
+
+    If Cline asks for approval, review and approve the file change. With **Auto-approve: Edit** enabled, it may write the file without asking. Check that the file exists in your project and contains `COGFOUNDRY_OK`.
+  </Step>
+</Steps>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I use another model?">
+    Copy its exact ID from [Models & pricing](https://cogfoundry.ai/en/models/). Choose a model that supports Chat Completions and tool calling, then update the Model ID and its context and output limits.
+
+    Configure Plan and Act separately if you use different models. Do not assume that every model in the dropdown supports file tasks or images.
+  </Accordion>
+
+  <Accordion title="Can I enter a model ID manually?">
+    Yes. Choose **Use custom model ID…**, then enter the exact ID in **Custom Model ID**. For example: `openai/gpt-4o-mini`.
+  </Accordion>
+
+  <Accordion title="Do I need to edit VS Code settings files?">
+    Use Cline's provider settings for this setup. They manage the connection without requiring you to put the key in your project's files.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/documentation/model-center/quickstart" horizontal />
+  <Card title="OpenCode" icon="terminal" href="/documentation/model-center/opencode" horizontal />
+  <Card title="Cline OpenAI-compatible configuration" icon="external-link" href="https://docs.cline.bot/provider-config/openai-compatible" horizontal />
+</Columns>

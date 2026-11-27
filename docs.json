@@ -42,7 +42,9 @@
             "pages": [
               "documentation/model-center/quickstart",
               "documentation/model-center/codex-desktop",
-              "documentation/model-center/claude-code"
+              "documentation/model-center/claude-code",
+              "documentation/model-center/opencode",
+              "documentation/model-center/cline"
             ]
           }
         ]
@@ -188,6 +190,14 @@
     {
       "source": "/privacy/:slug*",
       "destination": "/documentation/privacy/:slug*"
+    },
+    {
+      "source": "/opencode",
+      "destination": "/documentation/model-center/opencode"
+    },
+    {
+      "source": "/cline",
+      "destination": "/documentation/model-center/cline"
     }
   ],
   "navbar": {
