@@ -1,0 +1,149 @@
+---
+title: OpenClaw
+description: Connect OpenClaw to CogFoundry with a custom provider, then use it for chat and file tasks.
+icon: terminal
+---
+
+<Steps titleSize="h2">
+  <Step title="Prepare OpenClaw and your key">
+    Already using OpenClaw? Continue to the next step. Otherwise, follow the [official installation guide](https://docs.openclaw.ai/install) and complete its setup.
+
+    Copy your key from [API Keys](https://console.cogfoundry.ai/api-keys) and check your balance in [Credits](https://console.cogfoundry.ai/credits).
+
+    Open **Terminal** on macOS or Linux, or **PowerShell** on Windows. Check your installation:
+
+    ```bash
+    openclaw --version
+    ```
+  </Step>
+
+  <Step title="Add the CogFoundry provider">
+    Find your active configuration file:
+
+    ```bash
+    openclaw config file
+    ```
+
+    Make a backup copy of that file before continuing. The default location is:
+
+    <Tabs>
+      <Tab title="macOS">
+        `~/.openclaw/openclaw.json`
+      </Tab>
+      <Tab title="Windows">
+        `%USERPROFILE%\.openclaw\openclaw.json`
+      </Tab>
+      <Tab title="Linux">
+        `~/.openclaw/openclaw.json`
+      </Tab>
+    </Tabs>
+
+    In a plain-text editor, create **`cogfoundry.patch.json5`** in a folder of your choice. Paste the complete configuration below, replace `YOUR_COGFOUNDRY_API_KEY` with your CogFoundry key, and save.
+
+    ```json cogfoundry.patch.json5
+    {
+      "models": {
+        "mode": "merge",
+        "providers": {
+          "cogfoundry": {
+            "baseUrl": "https://router.cogfoundry.ai/api/v1",
+            "apiKey": "YOUR_COGFOUNDRY_API_KEY",
+            "api": "openai-completions",
+            "models": [
+              {
+                "id": "openai/gpt-4o-mini",
+                "name": "GPT-4o mini",
+                "reasoning": false,
+                "input": ["text"],
+                "contextWindow": 128000,
+                "maxTokens": 16384
+              }
+            ]
+          }
+        }
+      },
+      "agents": {
+        "defaults": {
+          "models": {
+            "cogfoundry/openai/gpt-4o-mini": {}
+          }
+        }
+      }
+    }
+    ```
+
+    In your terminal, change to the folder where you saved the patch. Apply it and validate the result:
+
+    ```bash
+    openclaw config patch --file ./cogfoundry.patch.json5
+    openclaw config validate
+    ```
+
+    <Note>
+      The patch merges into your existing configuration. If you already have a `cogfoundry` provider, this replaces its model list. Keep the patch private: it contains your API key.
+    </Note>
+  </Step>
+
+  <Step title="Select the model">
+    ```bash
+    openclaw models set cogfoundry/openai/gpt-4o-mini
+    openclaw models list
+    ```
+
+    <Note>
+      The model reference has two parts: the OpenClaw provider ID, `cogfoundry`, followed by the full CogFoundry model ID, `openai/gpt-4o-mini`.
+    </Note>
+
+    If you use a running Gateway service, restart it to apply the changes:
+
+    ```bash
+    openclaw gateway restart
+    ```
+  </Step>
+
+  <Step title="Test the connection">
+    Run a local agent turn:
+
+    ```bash
+    openclaw agent --local --session-id cog-connection-test --message "Reply with: Connected to CogFoundry. Do not use any tools." --timeout 120
+    ```
+
+    <Info>
+      A model reply confirms the connection. Requests use your CogFoundry credits.
+    </Info>
+
+    To try file tools, use a test workspace and send:
+
+    ```bash
+    openclaw agent --local --session-id cog-file-test --message "Create cog-connection-test.txt containing exactly COGFOUNDRY_OK. Read the file back and report its contents. Do not modify any other files." --timeout 120
+    ```
+
+    Check that the file exists in the agent's workspace and contains `COGFOUNDRY_OK`. The workspace is configured under `agents.defaults.workspace` in your OpenClaw configuration.
+  </Step>
+</Steps>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I use another model?">
+    Copy its exact ID from [Models & pricing](https://cogfoundry.ai/en/models/). Add it to the CogFoundry provider's `models` array, set its context and output limits, and add `cogfoundry/<model-id>` to `agents.defaults.models` if you use a model allowlist. Apply the updated patch, then select it with `openclaw models set`.
+
+    Choose a model that supports Chat Completions and tool calling for file tasks.
+  </Accordion>
+
+  <Accordion title="Does the Base URL include /chat/completions?">
+    No. Use `https://router.cogfoundry.ai/api/v1`. With `api` set to `openai-completions`, OpenClaw adds `/chat/completions` when it sends a request.
+  </Accordion>
+
+  <Accordion title="Can I use the dashboard instead?">
+    With your Gateway running, run `openclaw dashboard` to open it. Select the CogFoundry model for your conversation and send a test message. The local CLI test above runs without starting a Gateway.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/documentation/model-center/quickstart" horizontal />
+  <Card title="OpenClaw custom providers" icon="external-link" href="https://docs.openclaw.ai/concepts/model-providers/custom-providers" horizontal />
+  <Card title="OpenClaw configuration commands" icon="external-link" href="https://docs.openclaw.ai/cli/config" horizontal />
+</Columns>

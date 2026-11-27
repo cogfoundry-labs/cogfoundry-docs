@@ -1,0 +1,98 @@
+---
+title: DeepSeek Harness
+description: Connect DeepSeek Harness Desktop to CogFoundry through its OpenAI-compatible provider settings.
+icon: cpu
+---
+
+<Steps titleSize="h2">
+  <Step title="Prepare the app and your key">
+    Already using DSH Desktop? Continue to the next step. Otherwise, download it from the [official DeepSeek Harness website](https://www.deepseek.com/en/harness/). Choose **macOS (Apple silicon)** or **Windows (64-bit)** for your computer, install the app, and open it.
+
+    Copy your key from [API Keys](https://console.cogfoundry.ai/api-keys) and check your balance in [Credits](https://console.cogfoundry.ai/credits).
+  </Step>
+
+  <Step title="Add CogFoundry">
+    Open **Settings** in the lower-left corner, select **Models**, then click **Add a custom provider**.
+
+    Enter:
+
+    | Field | Value |
+    | --- | --- |
+    | Provider ID | `cogfoundry` |
+    | Display name | `CogFoundry` |
+    | Base URL | `https://router.cogfoundry.ai/api/v1` |
+    | API protocol | `openai-completions` — OpenAI Chat Completions |
+    | API key | Your CogFoundry API key |
+
+    <Note>
+      Enter the Base URL as shown. Do not append `/chat/completions`.
+    </Note>
+  </Step>
+
+  <Step title="Add a model">
+    In the model catalog, click **Add model**. Enter the model ID and display name, then expand **Capacities** to set the token limits:
+
+    | Field | Value |
+    | --- | --- |
+    | Model ID | `openai/gpt-4o-mini` |
+    | Display name | `GPT-4o mini` |
+    | Context window | `128000` |
+    | Max output tokens | `16384` |
+
+    <Note>
+      These are the CogFoundry catalog limits for GPT-4o mini. Keep other settings at their defaults for this text-only setup.
+    </Note>
+
+    Click **Create provider** to save the configuration.
+  </Step>
+
+  <Step title="Select the model and test">
+    Close Settings and start a **New session**. Choose a test workspace. Open the model menu beside the message box, open its **Model** submenu, and select **GPT-4o mini** under **CogFoundry**.
+
+    Send:
+
+    ```text
+    Reply with: Connected to CogFoundry. Do not use any tools.
+    ```
+
+    <Info>
+      A model reply confirms the connection. Requests use your CogFoundry credits.
+    </Info>
+
+    To test file tools, send this in the same test workspace:
+
+    ```text
+    Create cog-connection-test.txt containing exactly COGFOUNDRY_OK.
+    Read the file back and report its contents.
+    Do not modify any other files.
+    ```
+
+    Review any permission request before approving the file operation. Check that the file exists in your workspace and contains `COGFOUNDRY_OK`.
+  </Step>
+</Steps>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Do I need to fetch the model list?">
+    No. You can add the exact model ID manually using **Add model**. This also lets you set its context and output limits explicitly.
+  </Accordion>
+
+  <Accordion title="Can I use another model?">
+    Open **Settings → Models**, edit CogFoundry, and add the exact ID from [Models & pricing](https://cogfoundry.ai/en/models/), including the provider prefix. Set the model's context and output limits, save, and select it in a new session.
+
+    Choose a model that supports Chat Completions and tool calling for file tasks.
+  </Accordion>
+
+  <Accordion title="Do I need to edit configuration files?">
+    Use the provider form for this setup. DSH stores the connection settings and key for you.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/documentation/model-center/quickstart" horizontal />
+  <Card title="DeepSeek Harness provider settings" icon="external-link" href="https://deepseek-harness.github.io/deepseek-harness/en/guide/providers" horizontal />
+  <Card title="DeepSeek Harness project" icon="external-link" href="https://github.com/deepseek-ai/deepseek-harness" horizontal />
+</Columns>
