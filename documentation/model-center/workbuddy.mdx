@@ -1,0 +1,84 @@
+---
+title: WorkBuddy
+description: Use CogFoundry models in WorkBuddy for chat and file tasks with an OpenAI-compatible connection.
+icon: briefcase
+---
+
+<Steps titleSize="h2">
+  <Step title="Prepare WorkBuddy and your key">
+    Already using WorkBuddy? Continue to the next step. Otherwise, download and install it from the [official WorkBuddy website](https://www.workbuddy.ai/).
+
+    Copy your key from [API Keys](https://console.cogfoundry.ai/api-keys) and check your balance in [Credits](https://console.cogfoundry.ai/credits).
+  </Step>
+
+  <Step title="Open custom model settings">
+    Open your profile menu in the lower-left corner and choose **Settings**. Select **Models**, then click **Add model**.
+
+    In **Provider**, select **Custom** at the bottom of the list.
+  </Step>
+
+  <Step title="Enter the connection details">
+    | Field | Value |
+    | --- | --- |
+    | Provider | Custom |
+    | Endpoint | `https://router.cogfoundry.ai/api/v1` |
+    | API key | Your CogFoundry API key |
+    | Model name | `openai/gpt-4o-mini` |
+
+    <Note>
+      Use the full model ID, including `openai/`. Keep **Tool Calling** enabled. Leave **Image Input**, **Reasoning**, and **Custom Protocol** off for this setup; keep the input and output token settings at their defaults.
+    </Note>
+
+    Click **Save**.
+  </Step>
+
+  <Step title="Select the model and test">
+    Close Settings and start a **New task**. Open the model menu at the lower-right corner of the message box. Under **Custom models**, select the model you added.
+
+    Send:
+
+    ```text
+    Reply with: Connected to CogFoundry. Do not use any tools.
+    ```
+
+    <Info>
+      A model reply confirms the connection. Requests use your CogFoundry credits.
+    </Info>
+
+    To test file tools in the task's workspace, send:
+
+    ```text
+    Create cog-connection-test.txt containing exactly COGFOUNDRY_OK.
+    Read the file back and report its contents.
+    Do not modify any other files.
+    ```
+
+    Review any permission request before approving the file operation. Check that the file exists in the task's workspace and contains `COGFOUNDRY_OK`.
+  </Step>
+</Steps>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What goes in Model name?">
+    Enter the exact CogFoundry model ID, such as `openai/gpt-4o-mini`. This field identifies the model sent in API requests.
+  </Accordion>
+
+  <Accordion title="Can I add another model?">
+    Open **Settings → Models → Add model** and add another Custom entry with the same CogFoundry URL and key. Copy the exact model ID from [Models & pricing](https://cogfoundry.ai/en/models/), then save and select it from the chat's model menu.
+
+    Choose a model that supports Chat Completions and tool calling for file tasks. Enable image or reasoning options only when the selected model supports them.
+  </Accordion>
+
+  <Accordion title="Do I need Custom protocol?">
+    Leave it off for this setup. CogFoundry uses the standard OpenAI-compatible Chat Completions connection here.
+  </Accordion>
+</AccordionGroup>
+
+## Related guides
+
+<Columns cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/documentation/model-center/quickstart" horizontal />
+  <Card title="WorkBuddy" icon="external-link" href="https://www.workbuddy.ai/" horizontal />
+  <Card title="Models & pricing" icon="table" href="https://cogfoundry.ai/en/models/" horizontal />
+</Columns>
